@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./css/swiper.css">
+ <!--    <link rel="stylesheet" type="text/css" href="./css/default.css"> -->
+    <!-- Demo styles -->
+    <style>
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+//        background: #eee; 
+        background: #ddd; 
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+
+   .swiper-container {
+        width: 100%;
+        height: 100%;
+        text-align: left;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        background-size: cover;
+        height:100%;
+        /* Center slide text vertically  
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+/*        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;*/
+    }
+#tea-text{
+    position: absolute;
+    top:30%;
+    width:65%;
+    height:50%;
+}
+#tea-text-one{
+    right:10%;
+    background-position: 100% 0%;
+    opacity: 1;
+}
+.tea-text-item{
+    width:14%;
+    height:100%;
+    position: absolute;
+    background-size: 14%;
+    background-repeat:no-repeat;
+}
+#tea-text-two{
+    right:24%;
+    background-position: 80% 0%;
+    opacity: 1;
+}
+#tea-text-three{
+    right:38%;
+    background-position: 60% 0%;
+    opacity: 1;
+}
+#tea-text-four{
+    right:52%;
+    background-position: 40% 0%;
+    opacity: 1;
+}
+#tea-text-five{
+    right:64%;
+    background-position: 20% 0%;
+    opacity: 1;
+}
+#tea-text-six{
+    right:76%;
+    background-position: 0% 0%;
+    opacity: 1;
+}
+
+    </style>
+</head>
+<body>
+    <div class="shared-layer"></div>
+    <!-- Swiper -->
+    <div class="swiper-container" style="">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide page1 swiper-lazy" style="background-image:url(./images/list_1_bg_1.jpg)"> 
+
+                <div id="tea-text">
+                    <div id="tea-text-one" class="tea-text-item swiper-lazy" style="background-image:url(./images/list_1_text_1.png)"></div>
+                    <div id="tea-text-two" class="tea-text-item swiper-lazy" style="background-image:url(./images/list_1_text_1.png)"></div>
+                    <div id="tea-text-three" class="tea-text-item swiper-lazy"style="background-image:url(./images/list_1_text_1.png)"></div>
+                    <div id="tea-text-four" class="tea-text-item swiper-lazy" style="background-image:url(./images/list_1_text_1.png)"></div>
+                    <div id="tea-text-five" class="tea-text-item swiper-lazy" style="background-image:url(./images/list_1_text_1.png)"></div>
+                    <div id="tea-text-six" class="tea-text-item swiper-lazy" style="background-image:url(./images/list_1_text_1.png)"></div>
+                </div>
+               
+            </div>
+        </div>
+        <!-- Add Pagination -->
+<!--        <div class="swiper-pagination"></div>  -->
+
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="./js/swiper.js"></script>
+
+    <!-- Initialize Swiper -->
+
+    <script src="./js/zepto.js"></script>
+    <script type="text/javascript" src="./js/default.js"></script>
+</body>
+</html>

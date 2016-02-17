@@ -1,0 +1,480 @@
+﻿<!DOCYTPE html>
+<html lang="en">
+<head></head>
+<style type="text/css">
+body{
+    width:100%;
+    height:100%;
+    background-image:url(/public/images/charts_back.jpg);
+    background-size:100% 100%;
+}
+header{
+
+    border-bottom: 3px solid #0fff9c;
+}
+.chart-row{
+    height:400px;
+    background-color: #555;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+.chart-2column{
+    width:45%;
+    height:95%;
+    margin-left: 3%;
+    margin-top: 5px;
+    background-color: #888;
+    display: inline-block;
+    border-radius: 7px;
+}
+.chart-1column{
+    width:93%;
+    height:95%;
+    margin-left: 3%;
+    margin-top: 5px;
+    background-color: #888;
+    display: inline-block;
+    border-radius: 7px;
+}
+/*.chart-row:after{
+    content: "";
+    display: block;
+    height: 5px;
+    width:100%;
+    background-color: red;
+}*/
+.title-bar h3{
+    font-weight: normal;
+    color: #ddd;
+    margin: 0;
+    padding: 5px 10px;
+    height: 27px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background: #314053;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+.title-bar:after{
+    content: "";
+    display: block;
+    height: 3px;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #ff4dff), color-stop(1, #0080ff));
+}
+
+
+
+.control {
+  position: relative;
+  padding: 10px 15px 10px 15px;
+  background: #314053;
+  color: #fff;
+  height: 60px;
+  box-sizing: border-box;
+}
+.control ul {
+  display: inline-block;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+.control .location {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.control .btn-group {
+  margin-right: 200px;
+  display: none;
+}
+.control .btn-group li {
+  margin-right: 10px;
+  display: inline-block;
+  background: #5f5f5f;
+  width: 160px;
+  height: 40px;
+  font-size: 18px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  text-align: left;
+  border-radius: 4px;
+  line-height: 40px;
+  cursor: pointer;
+}
+.control .btn-group li span {
+  float: right;
+}
+.control #date-controls .years,
+.control .date-controls .years {
+  display: inline-block;
+  margin-right: 40px;
+}
+.control .month-buttons {
+  margin-left: 10px;
+}
+.control .month-buttons li {
+  position: relative;
+  margin: -10px 0 0 0;
+  width: 48px;
+  height: 14px;
+  background: #5b6777;
+  border-bottom: 1px solid #717a89;
+  box-sizing: border-box;
+  cursor: pointer;
+  float: left;
+}
+.control .month-buttons li label {
+  position: absolute;
+  top: 19px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  font-size:16px;
+}
+.control .month-buttons li .range-start {
+  left: -1em;
+}
+.control .month-buttons li .range-end {
+  right: -1em;
+}
+.control .month-buttons li.active,
+.control .month-buttons li:hover {
+  background: #5583b4;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+  border-bottom: none;
+}
+#page-title{
+    position: absolute;
+    font-size: 30px;
+    top: 20px;
+    left: 45%;
+}
+
+</style>
+
+<body>
+<header>
+
+<section class="control">
+    <div id="date-controls" class="date-controls">
+        <div class="years">
+            <label class="year">
+                <select id="year-selector">
+                    <option>2016</option>
+                    <option>2015</option>
+                </select>
+            </label>
+            <ul class="range month-buttons">
+                <li month="0" id="date-controls-item-0">
+                    <label >All</label>
+                </li>
+                <li month="1" id="date-controls-item-1">
+                    <label >1</label>
+                </li>
+                <li month="2" id="date-controls-item-2">
+                    <label >2</label>
+                </li>
+                <li month="3" id="date-controls-item-3">
+                    <label >3</label>
+                </li>
+                <li month="4" id="date-controls-item-4">
+                    <label >4</label>
+                </li>
+                <li month="5" id="date-controls-item-5">
+                    <label >5</label>
+                </li>
+                <li month="6" id="date-controls-item-6">
+                    <label >6</label>
+                </li>
+                <li month="7" id="date-controls-item-7">
+                    <label >7</label>
+                </li>
+                <li month="8" id="date-controls-item-8">
+                    <label >8</label>
+                </li>
+                <li month="9" id="date-controls-item-9">
+                    <label >9</label>
+                </li>
+                <li month="10" id="date-controls-item-10">
+                    <label >10</label>
+                </li>
+                <li month="11" id="date-controls-item-11">
+                    <label >11</label>
+                </li>
+                <li month="12" id="date-controls-item-12">
+                    <label >12</label>
+                </li>
+                <li month="14" id="date-controls-item-12">
+                    <label >本年</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <span id="page-title">钰溪随笔</span>
+</section>
+
+</header>
+<div class="chart-row">
+    <div class="chart-2column">
+        <div class="title-bar">
+            <h3>访问量曲线图</h3>
+        </div>
+         <div class="chart" id="pageview-line" style="height:90%;width:100%;"></div>   
+    </div>
+    <div class="chart-2column">
+        <div class="title-bar">
+            <h3>访问量柱状图</h3>
+        </div>
+        <div class="chart" id="pageview-bar" style="height:90%;width:100%;"></div>   
+    </div>
+</div>
+<div class="chart-row" style="height:500px;">
+    <div class="chart-1column">
+        <div class="title-bar">
+            <h3>访问者分布</h3>
+        </div>
+        <div class="chart" id="pageview-map" style="height:95%;width:90%;"></div>
+    </div>
+</div>
+</body>
+<script src="/public/javascripts/jquery-1.11.2.min.js"></script> 
+<script src="/public/javascripts/echart/echarts-all.js"></script> 
+<script src="/public/javascripts/self/dateFormat.js"></script>
+<script src="/public/javascripts/self/mycharts.js"></script>
+<script src="/public/javascripts/self/mask.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+    var mycharts = new createCharts();
+    var global_ajaxData;
+    var global_pvs;
+    function ajaxSuccessFun(data){
+        global_ajaxData = data;
+        global_pvs = data.pvs;
+        initChart(data);
+    }
+    function initChart(dt){
+        var data = parseLineData(dt.pvs);
+        var lineChartOptions = {
+            titleText:"",
+            titleSubText:"",
+            seriesName:"访问量",
+            data:data
+        };
+        var lineChart = mycharts.createLineCharts("pageview-line",lineChartOptions);
+
+        var barAxisCategory = parseBarData(dt.pvs)[0];
+        var barSeriesData = parseBarData(dt.pvs)[1];
+        var barChartOptions = {
+            titleText:"",
+            titleSubText:"",
+            seriesName:"页面访问量",
+            xAxis:barAxisCategory,
+            seriesData:barSeriesData
+        };
+        var barChart = mycharts.createBarCharts("pageview-bar",barChartOptions);
+/*        barChart.showLoading({
+            text: '正在努力的读取数据中...',    //loading话术
+        });*/
+        var mapData = parseMapData(dt.pvs);
+
+        var mapChartOptions = {
+            titleText:"",
+            titleSubText:"",
+            seriesName:"页面访问量",
+            seriesData:mapData
+        };
+        var mapChart = mycharts.createMapCharts("pageview-map",mapChartOptions);
+
+        lineChart.on("click",function(pa){
+            var selectedVal = new Date(pa.name).format("yyyy/M/d");
+            var rPvs = pvsReduce(global_pvs,["viewDay",selectedVal]);
+            var barAxisCategory = parseBarData(rPvs)[0];
+            var barSeriesData = parseBarData(rPvs)[1];
+            var mapData = parseMapData(rPvs);
+            var option = barChart.getOption();
+            option.xAxis[0].data = barAxisCategory;         
+            option.series[0].data = barSeriesData;
+            barChart.setOption(option,true);
+            option = mapChart.getOption();
+            option.series[0].data = mapData;
+            mapChart.setOption(option,true);
+        });
+        barChart.on("click",function(pa){
+            var selectedVal = pa.name;
+            if(selectedVal=="最大值" || selectedVal=="最小值" || selectedVal=="平均值")
+                return;
+            var rPvs = pvsReduce(global_pvs,["baseUrl",selectedVal]);
+            if(pa.name == "/index"){
+                rPvs = rPvs.concat(pvsReduce(global_pvs,["baseUrl",""]));
+                rPvs = rPvs.concat(pvsReduce(global_pvs,["baseUrl","/"]));
+                rPvs = rPvs.concat(pvsReduce(global_pvs,["baseUrl",'undefined']));
+            }
+            var option = lineChart.getOption();
+            option.series[0].data = parseLineData(rPvs);
+            lineChart.setOption(option,true);
+            option = mapChart.getOption();
+            option.series[0].data = parseMapData(rPvs);
+            mapChart.setOption(option,true);
+        });
+        mapChart.on("click",function(pa){
+            console.log(pa);
+            if(isNaN(pa.value)){
+                alert("所选区域没有记录.");
+                return;
+            }
+            var selectedVal = pa.name;
+
+            var rPvs = pvsReduce(global_pvs,["province",selectedVal]);
+            var option = lineChart.getOption();
+            option.series[0].data = parseLineData(rPvs);
+            lineChart.setOption(option,true);
+            option = barChart.getOption();
+            option.xAxis[0].data = parseBarData(rPvs)[0]; 
+            option.series[0].data = parseBarData(rPvs)[1];
+            barChart.clear();
+            barChart.setOption(option,true);
+        });
+    }
+
+    function parseLineData(pvs){
+        var lineData = [];
+        var pvsObj = {};
+        pvs.forEach(function(v,i){
+            if(pvsObj[v["viewDay"]]){
+                pvsObj[v["viewDay"]]++;
+            }else{
+                pvsObj[v["viewDay"]]=1;
+            }
+        });
+        $.each(pvsObj,function(name,val){
+            lineData.push([new Date(name),val]);
+        })
+        lineData = lineData.sort(function(a,b){return (new Date(a) - new Date(b))});
+        return lineData;
+    }
+
+    function parseBarData(pvs){
+        var barCategory = [];
+        var barSeriesData = [];
+        var pvsObj = {};
+        pvs.forEach(function(v,i){
+            var baseUrl = v["baseUrl"];
+            baseUrl = (!baseUrl || baseUrl =="/") ? "/index" : baseUrl;
+            if(baseUrl.indexOf("admin")<0){
+                if(pvsObj[baseUrl]){
+                    pvsObj[baseUrl]++;
+                }else{
+                    pvsObj[baseUrl]=1;
+                }
+            }
+            
+        });
+        $.each(pvsObj,function(name,val){
+            barCategory.push(name);
+            barSeriesData.push(val);
+        });
+        return [barCategory,barSeriesData];
+    }
+    function parseMapData(pvs){
+        var mapData = [];
+        var pvsObj = {};
+        pvs.forEach(function(v,i){
+            if(pvsObj[v["province"]]){
+                pvsObj[v["province"]]++;
+            }else{
+                pvsObj[v["province"]]=1;
+            }
+        });
+ //       http://api.map.baidu.com/location/ip?ak=E4805d16520de693a3fe707cdc962045&ip=202.198.16.3&coor=bd09ll
+        $.each(pvsObj,function(name,val){
+            mapData.push({name: name,value: val});
+        });
+        return mapData;
+    }
+    function pvsReduce(pvs,option){
+        var rPvs = [];
+        if(!option || !jQuery.isArray(option))
+            return rPvs;
+        rPvs = pvs.filter(function(val,item,arr){
+            return (option[0] in val) && (option[1] == val[option[0]]);
+        })
+        return rPvs;
+    }
+
+    var cMonth = new Date().getMonth()+1;
+    var nDate = new Date();
+    var startDate = new Date(nDate.getFullYear()+'/'+(nDate.getMonth()+1)+'/01');
+    var nextMonth = (cMonth +1>12) ? 1 : cMonth +1;
+    var newYear = (cMonth +1>12) ? startDate.getFullYear()+1 : startDate.getFullYear();
+    var endDate = new Date(new Date(newYear+'/'+nextMonth+'/01').getTime());
+    getAjaxData(startDate,endDate);
+    function getAjaxData(startDate,endDate){
+        $.ajax({
+            type:"GET",
+            url:"/getPageViewRecord",
+            dataType:"json",
+            data:{
+                startDate:startDate,
+                endDate:endDate
+            },
+            success:ajaxSuccessFun,
+            error:function(){alert("获取数据失败。")}
+        });
+    }
+    $(".date-controls li[month=" + cMonth +"]").addClass("active");
+    var mask = new maskLayer("pageview-line");
+    mask.initLayer();
+    var mask1 = new maskLayer("pageview-bar");
+    mask1.initLayer();
+    var mask2 = new maskLayer("pageview-map");
+    mask2.initLayer();
+    $(".date-controls li").on("click",function(e){
+        $(".date-controls li").removeClass("active");
+        $(this).addClass("active");
+        var cMonth = Number($(this).attr("month"));
+        var selectYear,startDate,nextMonth,newYear,endDate;
+        if(cMonth ==0){
+//            dd;
+        }else if(cMonth == 13){
+/*            var nDate = new Date();
+            var monthNow = Number(nDate.getMonth()) + 1;
+            var newMonth = monthNow-2 ?
+            var startDate = new Date(nDate.getFullYear()+'/'+(nDate.getMonth()+1)+'/01');
+            var nextMonth = (cMonth +1>12) ? 1 : cMonth +1;
+            var newYear = (cMonth +1>12) ? startDate.getFullYear()+1 : startDate.getFullYear();
+            var endDate = new Date(new Date(newYear+'/'+nextMonth+'/01').getTime());*/
+        }else if(cMonth == 14){
+            var nDate = new Date();
+            selectYear = Number($("#year-selector").val());
+            startDate = new Date(selectYear +'/01/01');
+            endDate = new Date(new Date((selectYear+1)+'/01/01').getTime());
+        }else{
+            selectYear = Number($("#year-selector").val());
+            startDate = new Date(selectYear +'/'+cMonth+'/01');
+            nextMonth = (cMonth +1>12) ? 1 : cMonth +1;
+            newYear = (cMonth +1>12) ? selectYear+1 : selectYear;
+            endDate = new Date(new Date(newYear+'/'+nextMonth+'/01').getTime());
+        }
+
+        getAjaxData(startDate,endDate);
+    });
+
+}
+
+</script>
+<script type="text/javascript">
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?9692ef34b380b66ae242390d9b633880";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</html>

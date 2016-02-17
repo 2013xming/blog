@@ -1,0 +1,45 @@
+<!DOCYTPE html>
+<html lang="en">
+<% include head.html %>
+<body onload="prettyPrint()">
+<% include header.html %>
+<div class="container" style="margin-top:20px;">
+	<% include container-left.html %>
+	<div class="content" style="">
+		<div id="content-wrap" style="">
+			<div class="bdsharebuttonbox" data-tag="share_1">
+				<a class="bds_tsina" data-cmd="tsina"></a>
+				<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+				<a class="bds_tqq" data-cmd="tqq"></a>
+				<a class="bds_more" data-cmd="more">更多</a>
+				<a class="bds_count" data-cmd="count"></a>
+			</div>
+			<div id="content" style="margin-right:0;"></div>
+		</div>
+	</div> <!--end class content  -->
+	<div class="right"></div>
+</div>
+
+<div id="disnone" style="display:none;"></div>
+<div id="dis-noteblock"  style="display:none;min-height:60%" data-id="">
+	<p style="text-align:right"><span class="iconfont" style="font-size:16px;color:#8840B0;">&#xf02e3;</span><span class="note-time"></span></p>
+	<h5 class="title" style="text-align:center;font-size:24px;"></h5>
+	<div class="note-content"></div>
+	<span class="iconfont" style="font-size:16px;color:#CC6666;;">&#xf00fc;</span>: &nbsp <span class="note-type" style="color:#2890f0"></span>
+	&nbsp&nbsp&nbsp&nbsp&nbsp <span class="iconfont" style="font-size:16px;color:#CC6666;">&#xf018b;</span>: &nbsp <span class="note-tags" style="color:rgb(240, 108, 33);"></span>
+</div>
+<% include footer.html %>
+</body>
+<% include commonjs.html %>
+<script type="text/javascript" src="/public/javascripts/views/notedetailed.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?9692ef34b380b66ae242390d9b633880";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</html>

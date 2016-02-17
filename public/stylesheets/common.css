@@ -1,0 +1,135 @@
+body{
+	background-color: #eee;
+}
+.listContainer{
+	min-height: 700px;
+	min-width: 1000px;
+	display: block;
+	position：relatvie;
+}
+footer{
+	text-align: center;
+	font-size:12px;
+	height:50px;
+}
+.nav-container{
+	height: 50px;
+	width: 100%;
+	margin-top: 15px;
+}
+.nav-header{
+	width:80%;
+	line-height: 50px;
+	font-size: 16px;
+	background-color:#222;
+	color:#5a5a5a;
+/*	text-align:center;  */
+	margin:0px auto;
+	border-radius: 5px;
+	box-shadow: 3px 4px 1px #556;
+}
+.nav-header ul li{
+	display: inline-block;
+	width: 100px;
+	margin:0 5px;
+	text-align:center;
+
+}
+.nav-header>ul>li>a{
+	color:#5a5a5a;
+	text-decoration: none;
+	display: inline-block;
+	width:100%;
+} 
+.nav-header>ul>li>a:hover{
+	color:#fff;
+	text-decoration: none;
+} 
+.nav-header ul li:hover{
+	color:#fff;
+	background-color:#000;
+	text-decoration: none;
+}
+span.down{
+	display: inline-block;
+	margin-left:6px;
+	border-left: solid 6px #222;
+	border-right: solid 6px #222;
+	border-top: solid 6px #5a5a5a;
+}
+div.container{
+	width:80%;
+	min-height: 600px;
+	background-color: #e6e6e6;
+	margin:25px auto;
+	border-radius: 10px;
+}
+.bubble{
+		height:100px;
+		width:100px;
+		border-radius: 50%;
+		background-color: red;
+		color:#fff;
+		text-align: center;
+		font-size: 30px;
+		line-height: 100px;
+		position: relative;
+		top:150px;
+		left:75px;
+		-webkit-animation-name:bubbleMove;
+		-webkit-animation-duration:3s;
+		-webkit-animation-timing-function:linear;
+	}
+/*.bubble:hover{
+		height:120px;
+		width:120px;   
+		line-height: 120px;	  
+		top:130px;
+		left:65px;
+		font-size: 34px;
+		color:#ff0;
+}  */
+.bubble.active{
+		height:120px;
+		width:120px;   
+		line-height: 120px;	  
+		top:130px;
+		left:65px;
+		font-size: 34px;
+		color:#ff0;
+}
+.rowContainer{
+		height: 250px;
+		width:250px;
+		position: relative;
+		display:inline-block;
+}
+@-webkit-keyframes bubbleMove{
+	0%{
+		top:0;
+
+	}
+	30%{
+		top:150px;
+
+	}
+	45%{
+		top:70px;
+	}
+	65%{
+		top:150px;
+	}
+	80%{
+		top:115px;
+	}
+	87%{
+		top:150px;
+	}
+	95%{
+		top:140px;
+	}
+	100%{
+		top:150px;
+	}
+
+}

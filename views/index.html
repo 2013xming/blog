@@ -1,0 +1,57 @@
+<!DOCYTPE html>
+<html lang="en">
+<% include head.html %>
+<style type="text/css">
+
+</style>
+<body>
+<% include header.html %>
+<div class="container" style="margin-top:20px;">
+
+		<% include container-left.html %>
+		<div class="content-wrap">
+			<div id="content">
+				
+			</div>
+			 <div class="pagination pagination-large" id="pagination">
+			</div><!--pagination-->
+		</div> <!--end class content  -->
+		<div class="right"></div>
+
+</div>
+<% include footer.html %>
+<div id="disnone" style="display:none;"></div>
+<div class="note-block" style="display:none;" data-id="">
+	<p style="text-align:right"><span class="iconfont" style="font-size:16px;color:#8840B0;">&#xf02e3;</span><span class="note-time"></span></p>
+	<h6 class="title" style="text-align:center"></h6>
+	<p class="note-content" style="font-size:18px;"></p>
+	<span class="iconfont" style="font-size:16px;color:#CC6666;">&#xf00fc;</span>&nbsp<span class="note-type" style="color:#2890f0"></span>
+	&nbsp&nbsp&nbsp&nbsp&nbsp <span class="iconfont" style="font-size:16px;color:#CC6666;">&#xf018b;</span>&nbsp<span class="note-tags" style="color:rgb(240, 108, 33)"></span>
+	<span class="note-all" style=""><a style="color:rgb(165, 51, 255);">查看全文</a></span>
+</div>
+<article id="dis-noteblock" class="article" style="display:none" data-id="">
+    <img class="article-img">
+    <div class="article-detail">
+	    <div class="article-title"><a><span class="title shortWords" style="text-align:center;font-size:28px;margin-top:10px;"></span></a></div>
+	    <div class="article-introduction"><p class="note-content" style="font-size:18px;line-height:1.25"></p></div>
+	    <div class="article-tp">
+	        <span class="article-type"><span class="iconfont" style="font-size:16px;color:#CC6666;">&#xf00fc;</span>&nbsp<span class="note-type" style="color:#2890f0"></span></span>
+	        <span class="article-posttime"><span class="iconfont" style="font-size:16px;color:#8840B0;">&#xf02e3;</span><span class="note-time"></span></span>
+	    </div>
+	    <span class="article-tags"><span class="iconfont" style="font-size:16px;color:#CC6666;">&#xf018b;</span>&nbsp<span class="note-tags" style="color:rgb(240, 108, 33)"></span></span>
+	</div>
+</article>
+</body>
+<% include commonjs.html %>
+<script type="text/javascript" src="/public/javascripts/views/index.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?9692ef34b380b66ae242390d9b633880";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</html>

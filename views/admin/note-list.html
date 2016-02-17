@@ -1,0 +1,194 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<![endif]-->
+<link href="/public/H-ui.admin/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="/public/H-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+<link href="/public/H-ui.admin/lib/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/jquery.dataTables.css">  
+<!--[if IE 7]>
+<link href="lib/font-awesome/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+<link href="/public/H-ui.admin/lib/iconfont/iconfont.css" rel="stylesheet" type="text/css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>笔记列表</title>
+<style type="text/css">
+    #tableContent span.modify:hover,span.delete:hover{
+        cursor:pointer;
+    }
+</style>
+</head>
+<body>
+<nav class="breadcrumb"><i class="iconfont">&#xf012b;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span class="c-gray en">&gt;</span> 笔记列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="icon-refresh"></i></a></nav>
+<div class="pd-20">
+  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="icon-trash"></i> 批量删除</a></span> <span class="r">共有数据：<strong>n</strong> 条</span> </div>
+<div cellspacing="0" style="width:97%;min-height:800px;margin:10px auto;">
+  <table id="tableContent" class="display" cellspacing="0" style="width:97%;margin:10px auto;table-layout:fixed;">
+
+  </table>
+</div>
+
+  
+</div>
+<script type="text/javascript" src="/public/javascripts/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/public/H-ui.admin/lib/layer1.8/layer.min.js"></script> 
+<script type="text/javascript" src="/public/H-ui.admin/lib/laypage/laypage.js"></script> 
+<script type="text/javascript" src="/public/H-ui.admin/lib/My97DatePicker/WdatePicker.js"></script> 
+<!-- <script type="text/javascript" src="/public/H-ui.admin/lib/jquery.dataTables.min.js"></script>  -->
+<script type="text/javascript" src="/public/H-ui.admin/js/H-ui.js"></script>  
+<script type="text/javascript" src="/public/H-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/public/H-ui.admin/js/H-ui.admin.doc.js"></script>
+
+
+<script type="text/javascript" language="javascript" src="/public/javascripts/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/public/javascripts/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/modernizr.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/jquery.cookie.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+ 
+        var getNotesCallbackFun = function(data){
+            var tableContent = jQuery("#tableContent");
+            var notes = data.notes;
+            var dataSet = [];
+            for(var i=0,len=notes.length;i<len;i++){
+                var temp = [];
+ //               var url = "/admin/editNote?_id=" + notes[i]._id;
+                temp.push('<input type="checkbox" id=""  noteId="'+ notes[i]._id +'" name="" class="tableCheckbox">');
+                temp.push(i+1);
+                temp.push(notes[i].title);
+                temp.push(notes[i].type);
+                temp.push(notes[i].tags);
+                temp.push(notes[i].content.slice(0,12)+"...");
+                temp.push(new Date(notes[i].updated).toLocaleDateString());
+//                temp.push('<input type="button" id="" name="" value="删除" class="tableDeleteButton">');
+                temp.push('<span class="iconfont modify" style="font-size:16px;">&#xf00be;</span>&nbsp&nbsp&nbsp<span class="iconfont delete" style="font-size:16px;">&#xf013f;</span>');
+                dataSet.push(temp);
+            }
+            tableContent.dataTable( {
+                "data": dataSet,
+                "columns": [
+
+                    {"class": "center","width":"20px"},
+                    { "title": "序号", "class": "center", "width":"40px"},
+                    { "title": "标题", "class": "center", "width":"100px" },
+                    { "title": "分类", "class": "center", "width":"100px" },
+                    { "title": "标签", "class": "center", "width":"100px" },
+                    { "title": "简介", "class": "center shortWords" },
+                    { "title": "时间", "class": "center", "width":"100px" },
+                    { "title": "操作", "class": "center", "width":"100px"}
+                ],
+                "order": [[ 1, 'asc' ]],
+                "aoColumnDefs": [
+                  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                  {"orderable":false,"aTargets":[0,7]}// 制定列不参与排序
+                ]
+            });
+
+        };
+        function getNotes(queryType,value,pagesize,pagenum){
+            var pageSize = pagesize || 1024*1024;
+            var pageNum = pagenum || 0;
+            var qt = queryType || "time";
+            qt = encodeURIComponent(qt);
+            var qValue = value || "";
+            value = encodeURIComponent(qValue);
+            var qts = ["type","tags","title","id","time"];
+            console.log("enter getNotes");
+            if(qt && qts.indexOf(qt)>=0){
+                jQuery.ajax({
+                    type:"GET",
+                    url:"/getnotes",
+                    data:{pageNum:pageNum,pageSize:pageSize,queryType:qt,value:value},
+                    success:getNotesCallbackFun
+                });
+            }
+        };
+        function deleteNote(_id){
+            var url = "/admin/deleteNote";
+            jQuery.ajax({
+                type:"GET",
+                url:url,
+                data:{_id:_id},
+                success:deleteNoteCallback
+            });
+        }
+        function deleteNoteCallback(data){
+            if(data.status == "success"){
+                alert("删除成功! 1秒后刷新");
+                window.location.reload();
+            }
+        };
+        function tableDbClickCallback(event){
+            var target = event.target;
+            if(target.tagName != "INPUT"){
+                var _id = jQuery(target).parents("tr").children().children(".tableCheckbox").attr("noteId");
+                var url = "/admin/editNote?_id=" + _id;
+                window.open(url,"_blank");
+            }
+        };
+        function tableDeleteCallback(event){
+            var target = event.target;
+            if(!confirm("确定要删除该记录么？"))
+                return;
+
+            var _id = jQuery(target).parents("tr").children().children(".tableCheckbox").attr("noteId");
+            deleteNote(_id);
+
+        };
+        function tableModifyCallback(event){
+            var target = event.target;
+            var _id = jQuery(target).parents("tr").children().children(".tableCheckbox").attr("noteId");
+            var url = "/admin/editNote?_id=" + _id;
+            window.open(url,"");
+        };
+//        jQuery("#tableContent").on("dblclick","tr",tableDbClickCallback);
+        jQuery("#tableContent").on("click",".delete",tableDeleteCallback).on("click",".modify",tableModifyCallback);
+        getNotes();
+    });
+       
+</script>
+
+<!-- <script type="text/javascript">
+$('.table-sort').dataTable({
+	"lengthMenu":false,//显示数量选择 
+	"bFilter": false,//过滤功能
+	"bPaginate": false,//翻页信息
+	"bInfo": false,//数量信息
+	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+	"bStateSave": true,//状态保存
+	"aoColumnDefs": [
+	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+	  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
+	]
+});
+</script> -->
+<!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+</script>  -->
+</body>
+</html>

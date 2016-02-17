@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>钰溪笔谈</title>
+<link rel="stylesheet" href="/public/stylesheets/style.default.css" type="text/css" />
+<script type="text/javascript" src="/public/javascripts/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/modernizr.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/jquery.cookie.js"></script>
+<script type="text/javascript" src="/public/javascripts/custom.js"></script>
+<script type="text/javascript" src="/public/javascripts/plugin/jquery.urlQuery.js"></script>
+
+<link href="/public/stylesheets/carousel.css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="/public/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/public/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/public/ueditor/lang/zh-cn/zh-cn.js"> </script>
+<style type="text/css">
+.btn-sp{
+    width:80px;
+    height: 25px;
+    background-color: #f66;
+    color: #fff;
+    border-radius: 2px;
+    display: inline-block;
+
+}
+.btn-sp:before{
+    margin-left:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="mainwrapper">
+    <% include admin-header.html %>
+    <% include admin-leftpanel.html %>
+    
+    <div class="rightpanel">
+        <div class="maincontent">
+            <div class="maincontentinner">    
+                <div class="row-fluid">
+                        <div style="width:95%;min-height:800px;margin:15px auto;">
+                            <input type="text" id="title" name="title" placeholder="标题" required autofocus style="width:340px;margin:10px auto;display:block;line-height:24px;font-size:18px;">
+                            <button class="btn-sp">预览</button><button class="btn-sp" id="publish">发布</button>
+                            <input type="text" id="type" placeholder="分类" required><span>多个分类以分号隔开</span>
+                            <input type="text" id="tags" placeholder="标签" required><span>多个标签以分号隔开</span>
+                            <textarea id="introduction" placeholder="文章描述,纯文本" style="height:100px;width:60%;" required></textarea>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							<span>添加说明图片</span>
+							<input type="file" id="uploadImage" value="添加"> 
+							<img id="smallimg" style="width:100px;height:100px;vertical-align: middle">
+                            <script id="editor" type="text/plain" style="width:100%;height:600px;"></script>
+                        </div>
+                        
+                </div><!--row-fluid-->
+                
+                <div class="footer">
+                    <div class="footer-left">
+                        <span>&copy; 2013. Shamcey Admin Template. All Rights Reserved.</span>
+                    </div>
+                    <div class="footer-right">
+                        <span>Designed by: <a href="http://themepixels.com/">ThemePixels</a></span>
+                    </div>
+                </div><!--footer-->
+                
+            </div><!--maincontentinner-->
+        </div><!--maincontent-->
+        
+    </div><!--rightpanel-->
+    
+</div><!--mainwrapper-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	jQuery("#uploadImage").on("change",function(){
+		var imgUrl = jQuery(this).val();
+		var data = new FormData();
+		var files = jQuery(this)[0].files;
+		if(files){
+			data.append('file',files[0])
+		}
+		jQuery.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/uploadImage',
+			data:data,
+			contentType:false,
+			processData:false,
+			success:function(da){
+				var srcUrl = '/getImage?imgId=' + da.id;
+				jQuery("#smallimg").attr('src',srcUrl);
+				jQuery("#smallimg").attr('data-fileId',da.id);
+			}
+		});
+		
+	});
+
+
+	var ue = UE.getEditor('editor');
+	var _id = jQuery.getUrlParamByName("_id");
+	 jQuery("#publish").on("click",function(){
+		var title = jQuery("#title").val();
+		var types = jQuery("#type").val();
+		var typeList = types.split(";");
+		var tags = jQuery("#tags").val();
+		var tagsList = tags.split(";");
+		var introduction = jQuery("#introduction").val();
+		var introImageId = jQuery("#smallimg").attr("data-fileId") || 'defaultImg';
+		//避免传入空类型和空标签
+		if(typeList[(typeList.length-1)] == "")
+			typeList.pop();
+		if(tagsList[(tagsList.length-1)] == "")
+			tagsList.pop();
+		var ue = UE.getEditor('editor');
+		var content = ue.getContent();
+		jQuery.ajax({
+				url:"/admin/updateNote",
+				type:"POST",
+				data:{
+					_id : _id,
+					noteTitle : title,
+					noteContent: content,
+					introduction : introduction,
+					types : typeList,
+					tags : tagsList,
+					author:"yuxi",
+					introImage:introImageId
+				},
+				success:function(data){
+					if(data.status && data.status =="success"){
+						alert("文章更新成功,2秒后刷新此页");
+						setTimeout(function(){
+							window.location.reload();
+							window.opener.location.reload();
+						},2000);
+					}
+				}
+			});
+	})
+	function getNotes(queryType,value,pagesize,pagenum){
+			var pageSize = pagesize || 1024*1024;
+			var pageNum = pagenum || 0;
+			var qt = queryType || "time";
+			qt = encodeURIComponent(qt);
+			var qValue = value || "";
+			value = encodeURIComponent(value);
+			var qts = ["type","tags","title","_id","time"];
+			console.log("enter getNotes");
+			if(queryType && qts.indexOf(queryType)>=0){
+				jQuery.ajax({
+					type:"GET",
+					url:"/getnotes",
+					data:{queryType:qt,value:value},
+					success:function(data){
+						var note = data.notes[0];
+						jQuery("#title").val(note.title);
+						jQuery("#type").val(note.type.join(";"));
+						jQuery("#tags").val(note.tags.join(";"));
+						jQuery("#introduction").val(note.introduction);
+						if(note.introImage && note.introImage!="defaultImg"){
+							var srcUrl = '/getImage?imgId=' + note.introImage;
+							jQuery("#smallimg").attr('src',srcUrl);
+							jQuery("#smallimg").attr('data-fileId',note.introImage);
+						}else{
+							var srcUrl = '/getImage?imgId=defaultImg';
+							jQuery("#smallimg").attr('src',srcUrl);
+							jQuery("#smallimg").attr('data-fileId','defaultImg');
+						}
+					
+						//必须先检测ue 编辑器是否准备好，否则报错
+						ue.addListener("ready",function(){          
+							ue.setContent(note.content);
+						});
+					}
+				});
+			}
+			
+	};
+	var initPage = function(){
+		getNotes("_id",_id,null,0);
+	};
+	initPage();
+});
+                           
+</script>
+</body>
+</html>

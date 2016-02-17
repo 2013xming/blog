@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>test demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS -->
+
+    <!-- Demo styles -->
+    <style>
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+//        background: #eee; 
+        background: #ddd; 
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+
+
+
+    </style>
+</head>
+<body>
+   <canvas id="canvas" width='800' height='600'>
+
+   </canvas>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext('2d');
+        var image = new Image();
+        image.src = "./images/list_3_pic_2.jpg"
+        image.onload = function(){
+            context.drawImage(image,0,0);
+        };
+        canvas.addEventListener("click",drawImage,false);
+        var isclicked;
+        function drawImage(){
+            var scale = 2;
+            context.clearRect(0,0,canvas.width,canvas.height);
+            if(!isclicked){
+                isclicked = false;
+                context.drawImage(image,0,0,canvas.width,canvas.height);
+            }else{
+                isclicked = true;
+                context.drawImage(image,0,0);
+            }
+        }
+    </script>
+
+    <!-- Initialize Swiper -->
+
+
+</body>
+</html>

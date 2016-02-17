@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./css/swiper.css">
+    <link rel="stylesheet" type="text/css" href="./css/default.css">
+    <!-- Demo styles -->
+    <style>
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+//        background: #eee; 
+        background: #ddd; 
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+        width:100%;
+    }
+    @media screen and (min-width:700px){ 
+        .wrapper{
+            width:640px;
+            height:100%;
+            position: relative;
+            margin: 0 auto;
+        }
+    }
+   .swiper-container {
+        width: 100%;
+        height: 100%;
+        text-align: left;
+    }
+    .wrapper{
+        width:100%;
+        height:100%;
+        position: relative;
+        margin: 0 auto;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        background-size: cover;
+        height:100%;
+        /* Center slide text vertically  
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+/*        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;*/
+    }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <audio src="./music/song.mp3" id="back_audio" autoplay loop>
+         您的浏览器不支持 audio 标签。
+        </audio>
+        <div class="loading">
+            <img src="./images/loader7.gif">
+            <p class="orange">加载中...</p>
+        </div>
+        <div class="shared-layer"></div>
+        <!-- Swiper -->
+        <div class="swiper-container" style="">
+            <div class="swiper-wrapper">
+                <div id="page1" class="swiper-slide page1 swiper-lazy swiper-no-swiping" data-background="./images/list_1_bg_1.jpg" style="background-size: cover;"> 
+                    <div class="one-top">
+                        <img class="audio swiper-lazy" data-src="./images/music_btn.png">
+                        <div class="one-top-title">
+                            <div id="one-title-1" class="swiper-lazy" data-background="./images/title_1.png" style=""></div>
+                            <div id="one-title-2" class="swiper-lazy" data-background="./images/title_1.png"></div>
+                        </div>
+                    </div>
+                    <div class="title-tea">
+                        <img class="tea swiper-lazy" data-src="./images/list_1_title_1.png">
+                        <img class="tea-leaf swiper-lazy" data-src="./images/leaf.png">
+                    </div>
+                    <img class="cup swiper-lazy" data-src="./images/page1_cup.png">
+                    <div id="tea-text">
+                        <div id="tea-text-one" class="tea-text-item swiper-lazy" data-background="./images/list_1_text_1.png"></div>
+                        <div id="tea-text-two" class="tea-text-item swiper-lazy" data-background="./images/list_1_text_1.png"></div>
+                        <div id="tea-text-three" class="tea-text-item swiper-lazy" data-background="./images/list_1_text_1.png"></div>
+                        <div id="tea-text-four" class="tea-text-item swiper-lazy" data-background="./images/list_1_text_1.png"></div>
+                        <div id="tea-text-five" class="tea-text-item swiper-lazy" data-background="./images/list_1_text_1.png"></div>
+                        <div id="tea-text-six" class="tea-text-item swiper-lazy" data-background="./images/list_1_text_1.png"></div>
+                    </div>
+                </div>
+                <div class="swiper-slide page2 swiper-lazy" data-background="./images/list_2_bg.jpg">
+                    <img class="audio swiper-lazy" data-src="./images/music_btn.png">
+                    <div id="two-1">
+                        <div class="top-image"></div>
+                        <div class="video">
+                           <!--  <embed src="http://v.163.com/swf/video/NetEaseFlvPlayerV3.swf" flashvars="pltype=7&amp;topicid=0026&amp;vid=VB60SI2ID&amp;sid=sect_0026&amp;coverpic=http://vimg1.ws.126.net/image/snapshot/2015/10/I/E/VB60SI2IE.jpg&amp;autoplay=false&amp;showend=false&amp;hiddenR=true" allowfullscreen="true" allowscriptaccess="always" quality="high" width="100%" height="100%" type="application/x-shockwave-flash"> -->
+                           <!--  <embed src="./images/NetEaseFlvPlayerV3.swf"  width="530" height="320"> -->
+                           <video src="./pDFIO2421.mp4" controls="controls" style="width:100%;height:100%;" >
+                           
+                            </video>
+                        </div>
+                        <div class="person-des"></div>
+                        <div class="bottom-image"></div>
+                    </div>
+                    
+                </div>
+                <div class="swiper-slide page3" >
+                    <img class="audio swiper-lazy" data-src="./images/music_btn.png">
+                    <div id="three-1" class="" data-background="./images/list_3_bg_1.png" style="width:80%;height:100%;background-image:url(./images/list_3_bg_1.png);background-size: contain;margin:10% auto; background-repeat:no-repeat;">
+                        <div class="page3-swiper-container" style="height:23%;position:absolute;top:37%;width:50%;left:25%;overflow:hidden;backface-visibility:hidden;">
+                            <div class="swiper-wrapper" style="backface-visibility:hidden;">
+                                <div class="swiper-slide swiper-lazy swiper-no-swiping" data-background="./images/list_3_pic_1.jpg" style="backface-visibility:hidden;background-size: cover;">
+                                </div>
+                                <div class="swiper-slide swiper-lazy swiper-no-swiping" data-background="./images/list_3_pic_2.jpg" style="backface-visibility:hidden;background-size: cover;">
+                                </div>
+                                <div class="swiper-slide swiper-lazy swiper-no-swiping" data-background="./images/list_3_pic_3.jpg" style="backface-visibility:hidden;background-size: cover;">
+                                </div>
+                                <div class="swiper-slide swiper-lazy swiper-no-swiping" data-background="./images/list_3_pic_4.jpg" style="backface-visibility:hidden;background-size: cover;">
+                                </div>
+                                <div class="swiper-slide swiper-lazy swiper-no-swiping" data-background="./images/list_3_pic_5.jpg" style="backface-visibility:hidden;background-size: cover;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prev-button" style="position:absolute;top:46%;left:5%;height:15%;width:10%;background-image:url(./images/btn_1.png);background-position:0 0;background-repeat:no-repeat;backface-visibility:hidden;">
+                    </div>
+                    <div class="next-button" style="position:absolute;top:46%;right:5%;height:15%;width:10%;background-image:url(./images/btn_1.png);background-position:100% 0;background-repeat:no-repeat;backface-visibility:hidden;">
+                    </div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+    <!--        <div class="swiper-pagination"></div>  -->
+
+        </div>
+    </div>
+    <!-- Swiper JS -->
+    <script src="./js/swiper.js"></script>
+
+    <!-- Initialize Swiper -->
+
+    <script src="./js/zepto.js"></script>
+    <script type="text/javascript" src="./js/Lottery.js"></script>
+    <script type="text/javascript" src="./js/default.js"></script>
+
+</body>
+</html>

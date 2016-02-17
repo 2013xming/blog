@@ -1,0 +1,130 @@
+<!DOCYTPE html>
+<html lang="en">
+<style type="text/css">
+#time-panel {
+    background: rgba(255,255,255,.8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    border: 1px solid #acb2bb;
+    padding: 13px;
+    margin-top: 5px;
+    width: 295px;
+    overflow: hidden;
+    position: absolute;
+    top: 32px;
+    right: 0;
+    display: none;
+}
+.time-panel-title {
+    font-weight: 700;
+    font-size: 14px;
+}
+.time-panel-control {
+    overflow: hidden;
+}
+.time-panel-progress-bar {
+    background: url(http://webmap0.map.bdstatic.com/newheatmap/static/index/images/time-progress-bar_3d8a295.png?__sprite) no-repeat right 0;
+    width: 252px;
+    height: 8px;
+    position: relative;
+    margin-top: 10px;
+}
+.time-panel-progress {
+    background: url(http://webmap0.map.bdstatic.com/newheatmap/static/index/images/time-progress_cb28985.png?__sprite) no-repeat 0 0;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: -5px;
+    left: 0;
+}
+.time-panel-progress-text {
+    overflow: hidden;
+    margin-top: -3px;
+    width: 270px;
+    position: relative;
+    left: -5px;
+}
+.time-panel-progress-tick {
+    float: left;
+    background: url(http://webmap0.map.bdstatic.com/newheatmap/static/index/images/tick_72211ea.png?__sprite) no-repeat 50% 0;
+    padding-top: 7px;
+    width: 12.5%;
+    text-align: center;
+}
+.time-panel-btn.play {
+    background: url(http://webmap0.map.bdstatic.com/newheatmap/static/index/images/time-btn-play_22fead8.png?__sprite) no-repeat 0 0;
+}
+.time-panel-btn {
+    background: url(http://webmap0.map.bdstatic.com/newheatmap/static/index/images/time-btn-pause_8c55183.png?__sprite) no-repeat 0 0;
+    width: 33px;
+    height: 33px;
+    float: right;
+    cursor: pointer;
+}
+.time-panel-progress-container {
+    float: left;
+    width: 252px;
+}
+</style>
+<script type="text/javascript" src="./jquery-1.11.2.js"></script>
+<body>
+<div id="time-panel" class="time-panel-hour" style="display: block;">       
+ <div class="time-panel-title"><span class="time-panel-date">2015.12.14</span><span class="time-panel-time">09:11</span></div>       
+ <div class="time-panel-control">            
+ 	<div class="time-panel-progress-container">               
+ 	 <div class="time-panel-progress-bar"><span class="time-panel-progress" style="left: 0px;"></span></div>               
+ 	  <div class="time-panel-progress-text"><span class="time-panel-progress-tick">2</span><span class="time-panel-progress-tick">3</span><span class="time-panel-progress-tick">4</span><span class="time-panel-progress-tick">5</span><span class="time-panel-progress-tick">6</span><span class="time-panel-progress-tick">7</span><span class="time-panel-progress-tick">8</span><span class="time-panel-progress-tick">9</span></div>            </div>            
+ 	  <div class="time-panel-btn play"></div>        
+ 	</div>   
+ 	</div>
+
+</body>
+
+<script>
+$(function(){
+	var time_panel_btn_interval;
+	var bar_width = $(".time-panel-progress-text").width();
+	var rate = 0.005;
+	var num = 0;
+	$(".time-panel-btn").click(function(){
+//		var left = $(".time-panel-progress").position().left;
+		if($(".time-panel-btn").hasClass("play")){
+			$(".time-panel-btn").removeClass("play");
+			time_panel_btn_interval = setInterval(function(){
+				num++;
+				console.log(num);
+				var left = (num * rate * bar_width + 3).toFixed(3) ;
+				console.log(left);
+				if(num == 25){
+					alert(1);
+				}
+				if(num == 50){
+					alert(2);
+				}
+				if(num == 75){
+					alert(3);
+				}
+				if(num == 100){
+					alert(4);
+				}
+				if(num == 125){
+					alert(5);
+				}
+				if(num == 150){
+					alert(6);
+				}
+				if(num == 175){
+					alert(7);
+					clearInterval(time_panel_btn_interval);
+				}
+				
+				$(".time-panel-progress").css("left",left+"px");
+			},100);
+		}else{
+			$(".time-panel-btn").addClass("play");
+			clearInterval(time_panel_btn_interval);
+		}
+	});
+})
+</script>
+
+</html>

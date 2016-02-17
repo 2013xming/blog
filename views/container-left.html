@@ -1,0 +1,55 @@
+<div id="catalog"><span class="iconfont">&#xf0025;</span></div>
+<div class="left">
+	<div class="nav">
+		<div class="nav-block">
+			<span class="iconfont" >&#xf01ae;</span>
+			<span class="nav-block-title">其他作品</span>
+			<ol class="links">
+				<li><a href="/public/example/mobileExample"><span>移动端案例</span></a></li>
+				<li><a href="/chartShow"><span>可视化</span></a></li>
+			</ol>
+		</div>
+		<div class="nav-block">
+			<span class="iconfont" >&#xf0042;</span>
+			<span class="nav-block-title">最新总结</span>
+			<ol class="lastet-article">
+				<% for(var i in latestNotes){ %>
+				<% var url = "/note?type=_id&queryStr="+ latestNotes[i]._id; %>
+				<li><a href=<%= url %> ><%= latestNotes[i].title %></a></li>
+				<% } %>
+			</ol>
+		</div>
+		<div class="nav-block">
+			<span class="iconfont" >&#xf00e1;</span>
+			<span class="nav-block-title">归档</span>
+			<ol class="archives">
+				<% for(var i in archives){ %>
+				<% var url = "/index?type=time&queryStr="+ i; %>
+				<li><a href=<%= url %> ><%= i %><span>(<%= archives[i] %>)</span></a></li>
+				<% } %>
+			</ol>
+		</div>
+		<div class="nav-block">
+			<span class="iconfont" >&#xf00fc;</span>
+			<span class="nav-block-title">分类</span>
+			<ol class="type">
+				<% for(var i in types){ %>
+				<% var url = "/index?type=type&queryStr="+ i ; %>
+				<li><a href=<%= url %> ><%= i %><span>(<%= types[i] %>)</span></a></li>
+				<% } %>
+			</ol>
+		</div>
+		<div class="nav-block">
+			<span class="iconfont" >&#xf018b;</span>
+			<span class="nav-block-title">标签</span>
+			<ol class="note-tags">
+				<% for(var i in tags){ %>
+				<% var url = "/index?type=tags&queryStr="+ i; %>
+				<li><a href=<%= url %> ><%= i %><span>(<%= tags[i] %>)</span></a></li>
+				<% } %>
+			</ol>
+		</div>
+		
+	</div>
+
+</div> 

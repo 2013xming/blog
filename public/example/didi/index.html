@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="/public/example/didi/css/swiper.css">
+    <link rel="stylesheet" type="text/css" href="/public/example/didi/css/default.css">
+    <!-- Demo styles -->
+    <style>
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+//        background: #eee; 
+        background: #ddd; 
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+
+   .swiper-container {
+        width: 100%;
+        height: 100%;
+        text-align: left;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        background-size: cover;
+        /* Center slide text vertically  
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+/*        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;*/
+    }
+
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <img src="/public/example/didi/images/loader7.gif">
+        <p class="orange">加载中...</p>
+    </div>
+    <div class="shared-layer"></div>
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide page1 swiper-lazy" data-background="./images/page-1.jpg"> 
+                <img class="logo swiper-lazy" data-src="/public/example/didi/images/logo.png">
+                <div class="maincontent">
+                    <img class="one-1 swiper-lazy" data-src="/public/example/didi/images/page-1-1.png">
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+            </div>
+            <div class="swiper-slide page2 swiper-lazy" data-background="./images/page-2.jpg">
+                <div id="two-1">
+                    <p class="orange">据统计,</p>
+                    <p class="orange">每天要和1312个陌生人相遇,</p>
+                    <p class="orange">有时候,</p>
+                    <p class="orange">陌生人的一两句话,</p>
+                    <p class="white">一个微笑,</p>
+                    <p class="white">却满是温暖。</p>
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+            </div>
+            <div class="swiper-slide page3 swiper-lazy" data-background="./images/page-3.jpg">
+                <div id="three-1">
+                    <img class="three-1-pic swiper-lazy" data-src="/public/example/didi/images/page-2-1.png">
+                    <div class="desc">
+                        <p class="white">人与人之间的心墙，只需要一句平常的话语，就能完全打开</p>
+                        <p class="white">这里网不好，回家再用滴滴付车费吧</p>
+                    </div>
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+            </div>
+           <div class="swiper-slide page4 swiper-lazy" data-background="./images/page-4.jpg">
+                <div id="four-1">
+                    <img class="four-1-pic swiper-lazy" data-src="/public/example/didi/images/page-4-1.png">
+                    <div class="desc">
+                        <p class="white">人与人之间的距离，一通电话，一次掉头，就悄然拉近</p>
+                        <p class="white">“文件落我车上了，你等我会儿，我到前面掉头给你送回来”</p>
+                    </div> 
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+            </div>
+            <div class="swiper-slide page5 swiper-lazy" data-background="./images/page-5.jpg">
+                <div id="five-1">
+                    <img class="five-1-pic swiper-lazy" data-src="/public/example/didi/images/page-5-1.png">
+                    <div class="desc">
+                        <p class="white">刮风下雨已不重要了，寒冬里那一句问候足以温暖你我</p>
+                        <p class="white">“你好，我到你家楼下了，外面在下雨，请记得带伞。”</p>
+                    </div>
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+            </div>
+            <div class="swiper-slide page6 swiper-lazy" data-background="./images/page-6.jpg">
+                <div id="six-1">
+                    <img class="six-1-pic swiper-lazy" data-src="/public/example/didi/images/page-6-1.png">
+                    <div class="desc">
+                        <p class="white">夜再黑，路再远，只要一束光，便可安心</p>
+                        <p class="white">“你好，我到你家楼下了，外面在下雨，请记得带伞。”</p>
+                    </div>
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+            </div>
+            <div class="swiper-slide page7 swiper-lazy" data-background="./images/page-7.jpg">
+                <div id="senven-1">
+                    <p class="orange">每天我都会遇见很多人，</p>
+                    <p class="orange">行色匆匆，</p>
+                    <p class="orange">因为走得太快，</p>
+                    <p class="orange">看不见来自于生活的感动。</p>
+                    <p class="white">其实，</p>
+                    <p class="white">感人的故事每天都在发生</p>
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+            </div>
+            <div class="swiper-slide page8 swiper-lazy" data-background="./images/page-8.jpg">
+                <div class="page-story">
+                    <img class="page-story-img-1 swiper-lazy" data-src="/public/example/didi/images/page-8-1.png">
+                    <img class="story-img swiper-lazy" data-src="/public/example/didi/images/page-8-2.png"> 
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                <div class="story">
+                    <img class="page-close swiper-lazy" data-src="/public/example/didi/images/xBtn.png">
+                    <img class="person-header swiper-lazy" data-src="/public/example/didi/images/story1.png">
+                    <p class="white story-p">&nbsp; &nbsp; &nbsp; &nbsp;2014年10月9日夜里，高师傅听到一个特殊的单，在这个订单里捎了一句话“媳妇快生了，请好心的师傅接单吧”，高师傅没有犹豫的接了单。夫妻俩上车后，师傅才发现是聋哑人。由于住得偏僻，不好叫车，小伙子灵机一动用了滴滴，并给司机捎了一句话。没想到真的有司机接单，师傅用最快的速度把夫妻俩送到了医院，最后母子平安。</p>
+                    <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                </div>
+            </div>
+            <div class="swiper-slide page9 swiper-lazy" data-background="./images/page-9.jpg">
+                <div class="page-story">
+                    <img class="page-story-img-1 swiper-lazy" data-src="/public/example/didi/images/page-9-1.png">
+                    <img class="story-img swiper-lazy" data-src="/public/example/didi/images/page-9-2.png">  
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                <div class="story">
+                    <img class="page-close swiper-lazy" data-src="/public/example/didi/images/xBtn.png">
+                    <img class="person-header swiper-lazy" data-src="/public/example/didi/images/story2.png">
+                    <p class="white story-p">&nbsp; &nbsp; &nbsp; &nbsp;2015年1月7号，天下着雪，孙师傅用滴滴接了一单，乘客上车后，表情凝重。经过与乘客聊天得知，家里老人走丢了，得赶回家帮着找。得知具体情况后，孙师傅仔细询问了老人的特征，并发动滴滴车队的全部师傅帮忙寻找老人。从晚上七点四十分一直到晚上十点多，历时4个小时终于找到了这位老人。</p>
+                    <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                </div>
+            </div>
+            <div class="swiper-slide page10 swiper-lazy" data-background="./images/page-10.jpg">
+                <div class="page-story">
+                    <img class="page-story-img-1 swiper-lazy" data-src="/public/example/didi/images/page-10-1.png">
+                    <img class="story-img swiper-lazy" data-src="/public/example/didi/images/page-10-2.png">
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                <div class="story">
+                    <img class="page-close swiper-lazy" data-src="/public/example/didi/images/xBtn.png">
+                    <img class="person-header swiper-lazy" data-src="/public/example/didi/images/story3.png">
+                    <p class="white story-p">&nbsp; &nbsp; &nbsp; &nbsp;2014年12月26日，接单后，顾师傅像平常一样，穿梭在大街小巷。但是，在行驶途中，乘客突发心脏病，顾师傅本能反应，将车停靠路边，帮助乘客寻找随身携带的救命药“救心丹”，乘客吃过药后，顾师傅立刻发动车，以最快的速度将乘客送到医院进行治疗。</p>
+                    <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                </div>
+            </div>
+            <div class="swiper-slide page11 swiper-lazy" data-background="./images/page-11.jpg">
+                <div class="page-story">
+                    <img class="page-story-img-1 swiper-lazy" data-src="/public/example/didi/images/page-11-1.png">
+                    <img class="story-img swiper-lazy" data-src="/public/example/didi/images/page-11-2.png">
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                <div class="story">
+                    <img class="page-close swiper-lazy" data-src="/public/example/didi/images/xBtn.png">
+                    <img class="person-header swiper-lazy" data-src="/public/example/didi/images/story4.png">
+                    <p class="white story-p">&nbsp; &nbsp; &nbsp; &nbsp;2015年1月5日，冯师傅傍晚在湖北大学上来一个背着双肩包的女孩，看似平常，却不料深夜10点左右，冯师傅接到一个电话，对方很焦急的询问出租车上是否拾到过一个钱包。在仔细询问后，冯师傅确认了她是湖北大学上车的那个女孩，在她下车后，师傅发现后座上有个钱包，但是给女孩打电话的时候发现关机了。第二天，冯师傅开着车将钱包送还给了女孩。</p>
+                    <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                </div>
+            </div>
+            <div class="swiper-slide page12 swiper-lazy" data-background="./images/page-12.jpg">
+                <div class="page-story">
+                    <img class="page-story-img-1 swiper-lazy" data-src="/public/example/didi/images/page-12-1.png">
+                    <img class="story-img swiper-lazy" data-src="/public/example/didi/images/page-12-2.png"> 
+                </div>
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                <div class="story">
+                    <img class="page-close swiper-lazy" data-src="/public/example/didi/images/xBtn.png">
+                    <img class="person-header swiper-lazy" data-src="/public/example/didi/images/story5.png">
+                    <p class="white story-p">&nbsp; &nbsp; &nbsp; &nbsp;2014年6月17日上午，高师傅抢到一个特别的订单，孙女带着年迈的奶奶去医院看病，女孩将病例和社保卡落在出租车上了。虽然女孩立刻联系了高师傅，但，高师傅已经拉了一个乘客，高师傅表示等把乘客送到目的地后会立刻把病例送到医院。就这样，高师傅空驶了10公里，将病例送到了医院。</p>
+                    <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+                </div>
+            </div>
+            <div class="swiper-slide page13 swiper-lazy" data-background="./images/page-13.jpg">
+                <img class="logo swiper-lazy" data-src="/public/example/didi/images/logo.png">
+                <div id="thirteen-1">
+                    <div id="share-desc">
+                        <p class="orange">寒冬里，</p>
+                        <p class="orange">请在下车的时候，</p>
+                        <p class="orange">对默默奉献的师傅们，</p>
+                        <p class="orange">说一声：</p>
+                    </div>
+                    <img id="thanks swiper-lazy" data-src="/public/example/didi/images/page-13-2.png">
+                </div>
+                <img class="share-img swiper-lazy" data-src="/public/example/didi/images/page-13-3.png">
+                <img class="slide-up swiper-lazy" data-src="/public/example/didi/images/pub-1.png">
+            </div>
+        </div>
+        <!-- Add Pagination -->
+<!--        <div class="swiper-pagination"></div>  -->
+
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="/public/example/didi/js/swiper.js"></script>
+
+    <!-- Initialize Swiper -->
+
+    <script src="/public/example/didi/js/zepto.js"></script>
+    <script type="text/javascript" src="/public/example/didi/js/default.js"></script>
+</body>
+</html>

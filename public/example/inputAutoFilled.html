@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>input</title>
+	<style type="text/css">
+		#div1 ul li{
+			list-style-type: none; 
+		}
+		#div1>ul>li.highlight{
+			background-color: rgb(214, 210, 210);
+		}
+		#div1>ul>li:hover{
+			background-color: rgb(214, 210, 210);
+		}
+		#div1 ul{
+			margin:0;
+			padding:0; 
+		}
+		#div1>ul>li>em{
+			font-style:normal;
+			font-weight:bold;
+			color:red;
+			font-size: 14px;
+		}
+		body{
+			text-align:center;
+		}	
+	</style>
+</head>
+<body>
+<input id="input1" type="text" style="width:350px;margin:0 auto;">
+</body>
+<script type="text/javascript">
+window.onload = function(){
+	function searchMatchContext(str){
+		var searchArr = ["57205000@qq.com","abcdf@163.com","dddsfd@abc.com","dddsveeg@123.com","dsadsfd@qq.com","asdasddf@163.com","bcvcvfff@163.com","ha1234@163.com","呵呵呵呵呵","12","自动匹配","cccvcvfff@163.com","dsgfdsfsdf@126.com","aaaaa@qq.com","abcccddd@126.com","abdsdddd@126.com","abddddd@126.com","abfffd@126.com","agggcddd@126.com"];
+		var reg = new RegExp("^("+str +")");
+		return searchArr.filter(function(val,i,array){
+			return reg.test(val);
+		}).map(function(val,i,array){
+			return val.replace(reg,"<em>$1</em>");
+		}).slice(0,4);
+	};
+	var autoFillInput = function(inputId){
+		if(!(this instanceof autoFillInput)){
+			return new autoFillInput();
+		}
+		this.inputElement = document.getElementById(inputId);;
+		this.matchContext;
+		this.macthContent;
+		this.isExistBox = false;
+		var that = this;
+		this.bindEvent = function(inputElement){
+			var boxClickHandler = function(event){
+				var event = event || window.event;
+				var target = event.target || event.srcElement;
+				console.log(target);
+			}
+			inputElement.addEventListener("input",function(){
+				if(inputElement.value ==""){
+					that.matchContext = [];
+					that.matchContent.clearItems();
+					that.matchContent.hideMatchBox();
+				}else {
+					that.matchContext = searchMatchContext(inputElement.value);
+					that.matchContent.clearItems();
+					that.matchContent.showMatchedBox(that.matchContext);
+				}
+			});
+			inputElement.addEventListener("focus",function(){
+				inputElement.addEventListener("keydown",that.keyUpHandler);
+			});
+			inputElement.addEventListener("blur",function(){
+				inputElement.removeEventListener("keyup",that.keyUpHandler);
+			});
+		};
+		this.init = function(inputElement){	
+			if(!this.isExistBox){
+				this.matchContent = new contentBox(this.inputElement);
+				this.isExistBox = true;
+			}
+			this.bindEvent(inputElement);
+		};
+		this.init(this.inputElement);
+		this.keyUpHandler = function(e){
+
+			var posIndex = that.matchContent.posIndex;
+			console.log(e);
+			switch(that.keyCodeToKeyName(e)){
+				case "Up":
+					if(e.preventDefault){
+						e.preventDefault();
+					}else{
+						e.returnValue = false;
+					}
+					for(var len=that.matchContent.childLiElements.length,i=len-1;i>=0;i--){
+						that.matchContent.childLiElements[i].className = "";
+					}
+					if(that.matchContent.posIndex>0){
+						that.matchContent.posIndex--;
+						that.matchContent.childLiElements[that.matchContent.posIndex].className = "highlight";
+					}else if(that.matchContent.posIndex<0){
+						that.matchContent.posIndex = len-1;
+						that.matchContent.childLiElements[that.matchContent.posIndex].className = "highlight";
+					}else{
+						that.matchContent.posIndex--;
+					}
+				break;
+				case "Down":
+					if(e.preventDefault){
+						e.preventDefault();
+					}else{
+						e.returnValue = false;
+					}
+					for(var len=that.matchContent.childLiElements.length,i=len-1;i>=0;i--){
+						that.matchContent.childLiElements[i].className = "";
+					}
+					if(that.matchContent.posIndex<that.matchContent.childLiElements.length-1){
+						that.matchContent.posIndex++;
+						that.matchContent.childLiElements[that.matchContent.posIndex].className = "highlight";
+					}else if(that.matchContent.posIndex == that.matchContent.childLiElements.length-1){
+						that.matchContent.posIndex = -1;
+					}
+				break;
+				case "Enter":
+					that.inputElement.value = (that.matchContent.posIndex>-1) ? (that.matchContent.childLiElements[that.matchContent.posIndex].innerText || that.matchContent.childLiElements[that.matchContent.posIndex].textContent): that.inputElement.value;
+					that.matchContent.clearItems();
+					that.matchContent.hideMatchBox();
+				break;
+			}
+		};
+		this.keyCodeToKeyName = function(event){
+			var keyname = null;
+			var keyCodetoName = {
+				8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Control",18:"Alt",19:"Pause",20:"CapsLock",27:"Esc",32:"Spacebar",33:"PageUp",34:"PageDown",35:"End",36:"Home",
+				37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Del",
+				//主键盘(非数字小键盘)上的数字键
+				48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",
+				//字母按键
+				65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"G",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",
+				//数字小键盘上的数字和标点符号按键
+				96:"0",97:"1",98:"2",99:"3",100:"4",101:"5",102:"6",103:"7",104:"8",105:"9",106:"Multiply",107:"Add",109:"Subtract",110:"Decimal",111:"Divide",
+				//功能键
+				112:"F1",113:"F2",114:"F3",115:"F4",116:"F5",117:"F6",118:"F7",119:"F8",120:"F9",121:"F10",122:"F11",123:"F12",124:"F13",125:"F14",126:"F15",127:"F16",128:"F17",129:"F18",130:"F19",131:"F20",132:"F21",133:"F22",134:"F23",135:"F24",
+				59:";",61:"=",186:";",187:"=",188:",",190:".",191:"/",192:"`",219:"[",220:"\\",221:"]",222:"'"
+
+			};
+			if(event.key){
+				keyname = event.key.substring(5) != "" ? event.key.substring(5) :event.key;
+			}else if(event.keyIdentifier && event.keyIdentifier.substring(0,2)!=="U+"){
+				keyname = event.keyIdentifier;
+			}else keyname = keyCodetoName[event.keyCode];
+			return keyname;
+		};
+		return this;
+	}
+	function contentBox(inputElement){
+		if(!(this instanceof contentBox)){
+			return new contentBox(inputElement);
+		}
+		this.left = getElementViewLeft(inputElement);
+		this.top = getElementViewTop(inputElement) + inputElement.clientHeight + 4;
+		this.width = inputElement.clientWidth + 2;
+		this.height = 100;
+		this.posIndex = -1;
+		this.childLiElements = null;
+		this.createMatchBox = function(inputElement){
+			if(this.divEle){
+				this.divEle.hidden = false;
+			}else{
+//IE9 需要加上单位 px,IE10,11Firefox,chrome不需要加"px". 
+				var divEle = document.createElement("div");
+				divEle.id = "div1";
+				divEle.style.position = "absolute";
+				divEle.style.left = this.left + "px";
+				divEle.style.top = this.top + "px";
+				divEle.style.border = "0";   //ie9 ie10 会显示border.
+				divEle.style.width = this.width + "px";
+				divEle.style.textAlign = "left";
+				divEle.hidden = true;
+				document.body.appendChild(divEle);
+			}
+			return divEle;
+		};
+		this.divEle = this.createMatchBox(inputElement);
+		var that = this;
+		this.boxClickHandler = function(event){
+			var event = event || window.event;
+			var target = event.target || event.srcElement;
+			console.log(that);
+			if(target.tagName=="LI"){
+				inputElement.value = target.innerText;
+				that.clearItems();
+				that.hideMatchBox();
+			}
+		}
+		return this;
+	}
+
+	contentBox.prototype.showMatchedBox = function(conArr){
+		if(conArr.length == 0){
+			this.divEle.hidden = true;
+			this.divEle.style.border = "0";
+			return;
+		}
+		this.divEle.style.border = "solid 1px grey";
+		var ul = document.createElement("ul");
+		conArr.map(function(val,i,array){
+			li = document.createElement("li");
+			li.innerHTML = val;
+			ul.appendChild(li);
+		});
+		this.childLiElements = ul.childNodes;
+		this.divEle.appendChild(ul);
+		this.divEle.addEventListener("click",this.boxClickHandler)
+		this.divEle.hidden = false;
+	};
+	contentBox.prototype.hideMatchBox = function(){
+		this.divEle.style.border = "0";
+		//ie10 不支持hidden 属性，hidden=true 不起作用
+		this.divEle.hidden = true;
+	};
+	contentBox.prototype.destroy = function(){
+		this.divEle = null;
+	};
+	contentBox.prototype.clearItems = function(){
+		var childNodes = this.divEle.childNodes;
+		for(var len=childNodes.length,i=len-1;i>=0;i--){
+			this.divEle.removeChild(childNodes[i]);
+		}
+		this.childLiElements = null;
+		this.posIndex = -1;
+	};
+	function getElementViewLeft(element){
+		var actualLeft = element.offsetLeft;
+		var current = element.offsetParent;
+		while(current != null){
+			actualLeft += current.offsetLeft;
+			current = current.offsetParent;
+		}
+		if(document.compatMode == "BackCompat"){
+			var elementScollLeft = document.body.scrollLeft;
+		}else{
+			var elementScollLeft = document.documentElement.scrollLeft;
+		}
+		return actualLeft - elementScollLeft;
+	};
+	function getElementViewTop(element){
+		var actualTop = element.offsetTop;
+		var current = element.offsetParent;
+		while(current != null){
+			actualTop += current.offsetTop;
+			current = current.offsetParent;
+		}
+		if(document.compatMode == "BackCompat"){
+			var elementScollTop = document.body.scrollTop;
+		}else{
+			var elementScollTop = document.documentElement.scrollTop;
+		}
+		return actualTop - elementScollTop;
+	}
+	new autoFillInput("input1");
+};
+</script>
+</html>

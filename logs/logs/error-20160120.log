@@ -1,0 +1,2 @@
+::1 - - [20/Jan/2016:06:45:30 +0000] "GET /qmh2014.github.io HTTP/1.1" 404 639 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"
+::1 - - [20/Jan/2016:06:45:30 +0000] "GET /favicon.ico HTTP/1.1" 404 639 "http://localhost:3000/qmh2014.github.io" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"

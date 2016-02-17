@@ -1,0 +1,36 @@
+<!DOCYTPE html>
+<html lang="en">
+<% include head.html %>
+<body>
+<% include header.html %>
+<div class="container" style="margin-top:20px;">
+	<% include container-left.html %>
+	<div class="content" style="">
+		<div id="content-wrap" style="">
+			<div id="content" style="">
+				<p>本站是作者在业余时间使用nodejs搭建起来的一个笔记站点，主要目的是利用此站锻炼web 开发能力和记录分享web相关技术。</p>
+				<p>小站的建设</p>
+				<p>本站使用nodejs作为开发环境，使用express框架搭建，数据库使用mongodb.
+				完成的主要功能就是记录和分享web开发中的一些学习心得，算是一个总结吧。实现了web服务的基本功能，包括页面访问路由功能，访问接入日志功能，调试信息输出到文件插件，访问量记录统计功能等等。</p>
+			</div>
+		</div>
+	</div> <!--end class content  -->
+	<div class="right"></div>
+</div>
+
+
+<% include footer.html %>
+</body>
+<% include commonjs.html %>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?9692ef34b380b66ae242390d9b633880";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</html>

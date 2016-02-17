@@ -1,0 +1,73 @@
+<% include header.html %>
+<style type="text/css">
+	.form-login{
+		margin:150px auto 0px auto;
+		max-width: 300px;
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		padding: 15px;
+
+	}
+	input{
+		display: block;
+		width:100%;
+		height: 30px;
+		line-height: 16px;
+
+	}
+	input#username{
+
+		border-top-left-radius:4px;
+		border-top-right-radius: 4px; 
+	}
+	input#password{
+		margin-top:-1px;
+		border-bottom-left-radius:4px;
+		border-bottom-right-radius: 4px; 
+	}
+	.login-content{
+		min-height: 700px;
+	}
+	.btn-submit{
+		color: #fff;
+		margin-top: 10px;
+		background-color: #286090;
+		border-color: #204d74;
+		width:100%;
+		padding: 10px 16px;
+		font-size: 18px;
+		line-height: 1.3333333;
+		border-radius: 6px;
+	}
+</style>
+<div class="login-content">
+
+	<form class="form-login" method="post" onsubmit="return submit()">
+		
+		<input id="username" name="username" placeholder="用户名" required autofocus>
+		<input id="password" name="password" type="password" placeholder="密码" required>
+		<p id="tips" style="color:red;font-size:12px;"><%= tips %></p>
+		<button class="btn-submit" type="submit">登录</button>
+	</form>
+ 
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	function submit(){
+		var username = $("#username").value();
+		var password = $("#password").value();
+
+		$.ajax({
+			type:"POST",
+			url:"/login",
+			data:{username:username,password:password},
+			success:function(data){
+				$("#tips").text(data.text);
+			}
+		});
+	}
+});
+	
+</script>
+
+<% include footer.html %>
