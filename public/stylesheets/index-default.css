@@ -388,3 +388,21 @@ footer a{
 footer a:hover{
 	text-decoration: none;
 }
+.share a{
+	text-decoration: none;
+	color: #fff;
+}
+.share a:hover{
+	text-decoration: none;
+	color:#168391;
+}
+.share a:hover .iconfont{
+	color:#168391;
+}
+a.share-icon{
+	margin-left: 8px;
+}
+.iconfont{
+	font-size:20px;
+	color:#808080;
+}

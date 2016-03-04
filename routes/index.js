@@ -4,7 +4,8 @@ var schemas = require("../modules/database/schemas/");
 var models = require("../modules/database/models/");
 var mongoose =require('mongoose');
 var session = require('express-session');
-var controller = require("./controller")
+var controller = require("./controller");
+var http = require('http') ;
 var maxAge = 1000*60*30;
 /* GET home page. */
 /* router.get('/admin/login',function(req,res){
@@ -130,4 +131,29 @@ router.post('/uploadImage',multipartMiddleware,function(req,res){
 });*/
 router.post('/uploadImage',controller.admin.uploadImage);
 router.get('/getImage',controller.note.getImage);
+router.get('/middlewareTest',function(req,res){
+	var tempdata = "";
+	 http.get({
+            host: 'yuxiblog.cn',
+            port: 80,
+            path: 'http://yuxiblog.cn/getPageViewRecord?startDate=Mon+Feb+01+2016+00%3A00%3A00+GMT%2B0800+(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&endDate=Tue+Mar+01+2016+00%3A00%3A00+GMT%2B0800+(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)',
+            method: 'GET',
+        }, function(response) {
+        	response.setEncoding('utf8');
+			response.on("data",function(d){
+				tempdata +=d;
+//				var data= JSON.parse(encodeURIComponent(d)); 
+//				res.send(d);
+			})
+			response.on("end",function(){
+//				console.log(tempdata);
+				var data= JSON.parse(tempdata); 
+				res.send(data);
+			});
+            
+        }).on('error', function(err) {
+            logger.error(err);
+            res.send(404);
+        });
+});
 module.exports = router;
