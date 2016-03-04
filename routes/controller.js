@@ -749,3 +749,14 @@ module.exports.note.getImage = function(req,res){
 	
 //	res.send(JSON.stringify({status:'success',state:state}));
 };
+module.exports.note.downloadTestApp = function(req,res){
+	var realpath = "public/apps/android-test.apk";
+	var filename = "android-test.apk";
+	res.download(realpath,filename,function(err){
+		if(err){
+			console.log(err);
+		}else{
+			console.log("success");
+		}
+	});
+};

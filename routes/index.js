@@ -131,7 +131,7 @@ router.post('/uploadImage',multipartMiddleware,function(req,res){
 });*/
 router.post('/uploadImage',controller.admin.uploadImage);
 router.get('/getImage',controller.note.getImage);
-router.get('/middlewareTest',function(req,res){
+/*router.get('/middlewareTest',function(req,res){
 	var tempdata = "";
 	 http.get({
             host: 'yuxiblog.cn',
@@ -155,5 +155,6 @@ router.get('/middlewareTest',function(req,res){
             logger.error(err);
             res.send(404);
         });
-});
+});*/
+router.get('/downloadTestApp',controller.note.downloadTestApp);
 module.exports = router;
