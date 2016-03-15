@@ -37,10 +37,10 @@ $("#catalog").on("click",function(){
        }));
        console.log("oOpts:");
        console.log(oOpts);
-    	alert("login");
+//    	alert("login");
     }
     function cbQuitFun(oOpts){
-    	alert("logout");
+//    	alert("logout");
     }
 
 </script>
@@ -51,10 +51,10 @@ $("#catalog").on("click",function(){
         type: '6,4',
         callback: {
             login: function (o) { //登录后的回调函数
-                alert("login: " + o.screen_name)
+//                alert("login: " + o.screen_name)
             },
             logout: function () { //退出后的回调函数
-                alert('logout');
+ //               alert('logout');
             }
         }
     });
