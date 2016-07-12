@@ -167,5 +167,5 @@ router.get('/getUser',controller.note.getUser);
 
 
 //RESTFull 接口重构
-router.get('/notes/:id',controller.restfull.notes.getNote);
+router.get('/notes/id/:id',controller.restfull.notes.getNoteById);
 module.exports = router;

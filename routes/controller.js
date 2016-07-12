@@ -15,7 +15,7 @@ var fileLogs = require("../logs/index");
 var Global_Index = 0;
 
 var userService = require("../service/userService");
-
+var noteService = require("../service/noteService");
 /*var getNoteTypes = function(){
 	console.log("getNoteTypes");
 	var type = mongoose.model('Type',models.Type);
@@ -555,7 +555,8 @@ var getNotesCallback = function(pageNum,pageSize,eventProxyIndex){
 		var size = rs.length;
 		var start = 0,end=size;
 		if(pageNum && pageSize){
-			start = pageNum*pageSize,end = ((pageNum+1)*pageSize)>size ? size : (pageNum+1)*pageSize;
+			start = Number(pageNum)*Number(pageSize);
+			end = ((Number(pageNum)+1)*Number(pageSize))>size ? size : (Number(pageNum)+1)*Number(pageSize);
 			console.log("....pageNum:"+pageNum +"end:"+end);
 		}
 		console.log("pageNum:"+pageNum +"end:"+end);
@@ -871,11 +872,11 @@ module.exports.note.getUser = function(req,res){
 module.exports.restfull = {
 	notes:{}
 }
-module.exports.restfull.notes.getNote = function(req,res){
+module.exports.restfull.notes.getNoteById = function(req,res){
 	let noteId = req.params.id;
 	console.log(noteId);
-	res.send(JSON.stringify({status:'success'}));
-	/*noteService.findNoteById(noteId).then((result)=>{
+	
+	noteService.findNoteById(noteId).then((result)=>{
 		res.send(JSON.stringify({status:'success',note:result}));
-	});*/
+	});
 }
