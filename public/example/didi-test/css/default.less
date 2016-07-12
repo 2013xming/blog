@@ -111,12 +111,14 @@ height:100%;
 	transform: scale(@scale);
 	-webkit-transform: scale(@scale);
 	-moz-transform: scale(@scale);
+	-ms-transform: scale(@scale);
 	-o-transform: scale(@scale);
 }
 .transition_all(@property:all,@duration:1s,@fun:ease,@delay:0s){
 	transition:@property @duration @fun @delay;
 	-webkit-transition:@property @duration @fun @delay;
 	moz-transition:@property @duration @fun @delay;
+	-ms-transition:@property @duration @fun @delay;
 	-o-transition:@property @duration @fun @delay;
 }
 .logo{

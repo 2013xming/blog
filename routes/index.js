@@ -157,4 +157,15 @@ router.get('/getImage',controller.note.getImage);
         });
 });*/
 router.get('/downloadTestApp',controller.note.downloadTestApp);
+
+router.post('/uploadTestImage',controller.note.uploadImage);
+router.post('/uploadCoverImage',controller.note.uploadCoverImage);
+
+router.get('/getUser',controller.note.getUser);
+
+
+
+
+//RESTFull 接口重构
+router.get('/notes/:id',controller.restfull.notes.getNote);
 module.exports = router;

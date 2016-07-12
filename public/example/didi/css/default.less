@@ -45,6 +45,11 @@
 	top:50%;
 	left:40%;
 }
+.rgba(@rgba_a:.4,@rgb_b:40){
+  filter: alpha(opacity=@rgb_b); 
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{rgb_b})"; 
+  opacity:@rgb_a;	
+}
 .animation(@name:none,@duration:0,@timing-function:ease,@delay:0s,@iteration-count:1,@direction:normal){
 	animation: @name @duration @timing-function @delay @iteration-count @direction;
 	-moz-animation: @name @duration @timing-function @delay @iteration-count @direction;	// Firefox 

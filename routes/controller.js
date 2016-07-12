@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 var schemas = require("../modules/database/schemas/");
 var models = require("../modules/database/models/");
@@ -12,6 +13,8 @@ require('../modules/self/dateFormat.js');
 var jqueryTool = require('./jqueryTool');
 var fileLogs = require("../logs/index");
 var Global_Index = 0;
+
+var userService = require("../service/userService");
 
 /*var getNoteTypes = function(){
 	console.log("getNoteTypes");
@@ -64,7 +67,7 @@ var getNoteTypes = function(eventProxyIndex){
 
 		if(result.length != 0){
 			for(var i in result){
-				tps =  result[i].type;
+				let tps =  result[i].type;
 				for(var j=0,len=tps.length;j<len;j++){    //for(var j in tps){}  会出现很多隐藏的属性
 					if(!types[tps[j]]){
 						types[tps[j]] = 1;
@@ -92,7 +95,7 @@ var	getNoteTags = function(eventProxyIndex){
 	note.find({deleted:false},function(err,result){
 		if(result.length != 0){
 			for(var i in result){
-				tgs =  result[i].tags;
+				var tgs =  result[i].tags;
 				for(var j=0,len=tgs.length;j<len;j++){    //for(var j in tps){}  会出现很多隐藏的属性
 					if(!tags[tgs[j]]){
 						tags[tgs[j]] = 1;
@@ -120,7 +123,7 @@ var	getArchives = function(eventProxyIndex){
 	note.find({deleted:false}).sort({publishDate:'desc'}).exec(function(err,result){
 		if(result.length != 0){
 			for(var i in result){
-				pDate =  result[i].publishDate;
+				var pDate =  result[i].publishDate;
 				var arc = pDate.getFullYear() + "/" +monthList[pDate.getMonth()];
 				if(!archives[arc])
 					archives[arc] = 1;
@@ -294,7 +297,8 @@ module.exports.note.index = function(req,res){
 	var eventProxyIndex4 = getEventProxyIndex();
 	ep.all(eventProxyIndex1,eventProxyIndex2,eventProxyIndex3,eventProxyIndex4,function (types,tags,archives,latestNotes){
 		var nav_head = "index";
-		res.render('index',{nav_head:nav_head,types:types,tags:tags,archives:archives,latestNotes:latestNotes});
+		var SEO_description = '钰溪笔谈,yuxiblog,yuxiblog.cn,前端随笔,前端博客,yuxi';
+		res.render('index',{nav_head:nav_head,types:types,tags:tags,archives:archives,latestNotes:latestNotes,SEO_description:SEO_description});
 	});
 	getNoteTypes(eventProxyIndex1);
 	getNoteTags(eventProxyIndex2);
@@ -308,18 +312,31 @@ module.exports.note.show = function(req,res){
 
 		res.render('note',{types:types,tags:tags,archives:archives,note:data.notes});
 	});*/
+var pageNum = req.query.pageNum;
+	var pageSize = req.query.pageSize;
+	var queryname = decodeURIComponent(req.query.type);
+	var queryvalue = decodeURIComponent(req.query.queryStr);
+	var eventProxyIndex5 = getEventProxyIndex();
+/*	ep.all(eventProxyIndex,function(data){
+		res.send({status:"success",notes:data.notes,totalSize:data.size,end:data.end});
+	});
+	*/
+	
 	var eventProxyIndex1 = getEventProxyIndex();
 	var eventProxyIndex2 = getEventProxyIndex();
 	var eventProxyIndex3 = getEventProxyIndex();
 	var eventProxyIndex4 = getEventProxyIndex();
-	ep.all(eventProxyIndex1,eventProxyIndex2,eventProxyIndex3,eventProxyIndex4,function (types,tags,archives,latestNotes){
+	ep.all(eventProxyIndex1,eventProxyIndex2,eventProxyIndex3,eventProxyIndex4,eventProxyIndex5,function (types,tags,archives,latestNotes,data){
 		var nav_head = "index";
-		res.render('note',{nav_head:nav_head,types:types,tags:tags,archives:archives,latestNotes:latestNotes});
+		var title = data.notes[0].title;
+		var SEO_description = title + ',' + data.notes[0].introduction;
+		res.render('note',{nav_head:nav_head,types:types,tags:tags,archives:archives,latestNotes:latestNotes,SEO_description:SEO_description});
 	});
 	getNoteTypes(eventProxyIndex1);
 	getNoteTags(eventProxyIndex2);
 	getArchives(eventProxyIndex3);
 	getLatestNotes(eventProxyIndex4);
+	getNotes(queryname,queryvalue,pageNum,pageSize,eventProxyIndex5);
 //	getNotes("_id",id);
 };
 
@@ -330,7 +347,8 @@ module.exports.note.webDescription = function(req,res){
 	var eventProxyIndex4 = getEventProxyIndex();
 	ep.all(eventProxyIndex1,eventProxyIndex2,eventProxyIndex3,eventProxyIndex4,function (types,tags,archives,latestNotes){
 		var nav_head = "nav_des";
-		res.render('webDescription',{nav_head:nav_head,types:types,tags:tags,archives:archives,latestNotes:latestNotes});
+		var SEO_description = '钰溪笔谈,yuxiblog,yuxiblog.cn,前端随笔,前端博客,yuxi';
+		res.render('webDescription',{nav_head:nav_head,types:types,tags:tags,archives:archives,latestNotes:latestNotes,SEO_description:SEO_description});
 	});
 	getNoteTypes(eventProxyIndex1);
 	getNoteTags(eventProxyIndex2);
@@ -344,7 +362,8 @@ module.exports.note.aboutAuthor = function(req,res){
 	var eventProxyIndex4 = getEventProxyIndex();
 	ep.all(eventProxyIndex1,eventProxyIndex2,eventProxyIndex3,eventProxyIndex4,function (types,tags,archives,latestNotes){
 		var nav_head = "nav_author";
-		res.render('aboutAuthor',{nav_head:nav_head,types:types,tags:tags,archives:archives,latestNotes:latestNotes});
+		var SEO_description = '钰溪笔谈,yuxiblog,yuxiblog.cn,前端随笔,前端博客,yuxi';
+		res.render('aboutAuthor',{nav_head:nav_head,types:types,tags:tags,archives:archives,latestNotes:latestNotes,SEO_description:SEO_description});
 	});
 	getNoteTypes(eventProxyIndex1);
 	getNoteTags(eventProxyIndex2);
@@ -760,3 +779,103 @@ module.exports.note.downloadTestApp = function(req,res){
 		}
 	});
 };
+
+
+module.exports.note.uploadImage = function(req,res){
+	console.log(req.files);
+//	res.send(JSON.stringify({status:'success'}));
+	var form = new multiparty.Form({uploadDir:'./'});
+		form.parse(req, function(err, fields, files) {
+			console.log(files);
+	    var filesTmp = JSON.stringify(files,null,2);
+	    	console.log(files);
+	    if(err){
+	      console.log('parse error: ' + err);
+	    } else {
+	      console.log('parse files: ' + filesTmp);
+	      var inputFile = files.file[0];
+	      console.log(inputFile.path);
+	      var exg = /\.[a-z]+/i;
+	      var uploadedPath = inputFile.path;
+	      var extension = exg.exec(inputFile.originalFilename)[0];
+	      var fileId = new Date().getTime();
+	      var dstPath = './public/images/upload/' + fileId + extension;
+	      //重命名为真实文件名
+	      fs.rename(uploadedPath, dstPath, function(err) {
+	        if(err){
+	          console.log('rename error: ' + err);
+	        } else {
+	          console.log('rename ok');
+	        }
+	      });
+	      var file = new models.File({ 
+			    fileId : fileId,
+				originalFilename : inputFile.originalFilename,
+				savedFilename : dstPath,
+			});
+			file.save(function (err) {
+				if (err) return console.error(err);
+			});  
+	    }
+
+	    res.send(JSON.stringify({status:'success',id:fileId}));
+	 });
+}
+module.exports.note.uploadCoverImage = function(req,res){
+	console.log(req.files);
+//	res.send(JSON.stringify({status:'success'}));
+	var form = new multiparty.Form({uploadDir:'./'});
+		form.parse(req, function(err, fields, files) {
+			console.log(files);
+	    var filesTmp = JSON.stringify(files,null,2);
+	    	console.log(files);
+	    if(err){
+	      console.log('parse error: ' + err);
+	    } else {
+	      console.log('parse files: ' + filesTmp);
+	      var inputFile = files.file[0];
+	      console.log(inputFile.path);
+	      var exg = /\.[a-z]+/i;
+	      var uploadedPath = inputFile.path;
+	      var extension = exg.exec(inputFile.originalFilename)[0];
+	      var fileId = new Date().getTime();
+	      var dstPath = './public/images/upload/' + fileId + extension;
+	      //重命名为真实文件名
+	      fs.rename(uploadedPath, dstPath, function(err) {
+	        if(err){
+	          console.log('rename error: ' + err);
+	        } else {
+	          console.log('rename ok');
+	        }
+	      });
+	      var file = new models.File({ 
+			    fileId : fileId,
+				originalFilename : inputFile.originalFilename,
+				savedFilename : dstPath,
+			});
+			file.save(function (err) {
+				if (err) return console.error(err);
+			});  
+	    }
+
+	    res.send(JSON.stringify({status:'success',id:fileId}));
+	 });
+};
+module.exports.note.getUser = function(req,res){
+	let username = "yuxi";
+	var user = userService.findByUserName(username).then(function(result){
+		res.send(JSON.stringify({status:'success',username:result}));
+	});	
+}
+
+module.exports.restfull = {
+	notes:{}
+}
+module.exports.restfull.notes.getNote = function(req,res){
+	let noteId = req.params.id;
+	console.log(noteId);
+	res.send(JSON.stringify({status:'success'}));
+	/*noteService.findNoteById(noteId).then((result)=>{
+		res.send(JSON.stringify({status:'success',note:result}));
+	});*/
+}

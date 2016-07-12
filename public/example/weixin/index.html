@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>生成动画</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="./css/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="./css/diyUpload.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <!-- Demo styles -->
+    <style>
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    ul{
+        padding: 0;
+    }
+    #box{ margin:50px auto; width:100%;}
+    #uploadCover{
+        width: 100%;
+    }
+    </style>
+</head>
+<body>
+    <label>游记标题:</label><input type="text" id="travel-title">
+    <h4>封面照片：</h4>
+    <div id="uploadCover">
+
+    </div>
+    <h4>内容照片：</h4>
+    <div id="box">
+        <div id="uploadImg" ></div>
+    </div>
+    <button id="submitTravel">生成游记</button>
+</body>
+<script type="text/javascript" src="./js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="./js/webuploader.js"></script>
+<script type="text/javascript" src="./js/diyUpload.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    /*
+* 服务器地址,成功返回,失败返回参数格式依照jquery.ajax习惯;
+* 其他参数同WebUploader
+*/
+    $('#uploadCover').diyUpload({
+        url:'/uploadCoverImage',
+        success:function( data ) {        
+            console.info( data );
+            var coverImg = '<img src="" data-src="'+ data.id +'" style="display:none;" class="coverImg">';
+            $('#uploadCover').append(coverImg);
+        },
+        error:function( err ) {
+            console.info( err );
+//            window.location.href = "http://www.baidu.com/"
+        },
+        text:"上传封面",
+        thumb:{
+                // width:100%,
+                // height:400,
+                // 图片质量，只有type为`image/jpeg`的时候才有效。
+                quality:70,
+                // 是否允许放大，如果想要生成小图的时候不失真，此选项应该设置为false.
+                allowMagnify:false,
+                // 是否允许裁剪。
+                crop:true,
+                // 为空的话则保留原有图片格式。
+                // 否则强制转换成指定的类型。
+                type:"image/jpeg"
+            },
+        fileNumLimit:1,
+        fileSizeLimit:1000 * 1024,
+        fileSingleSizeLimit:1000 * 1024
+    });
+    $('#uploadImg').diyUpload({
+        url:'/uploadTestImage',
+        success:function( data ) {
+            console.info( data );
+            var coverImg = '<img src="" data-src="'+ data.id +'" style="display:none;" class="contentImg">';
+            $('#uploadImg').append(coverImg);
+        },
+        error:function( err ) {
+            console.info( err );
+//            window.location.href = "http://www.baidu.com/"
+        }
+    });
+    $("#submitTravel").on("click",function(){
+        var title = $("#travel-title").val();
+        var coverImgUrl = $(".coverImg").attr("data-src");
+        var contentImgs = [];
+        var contentImgEles = $(".contentImg");
+        for(var i=0,len=contentImgEles.length;i<len;i++){
+            contentImgs.push(contentImgEles[i].src);
+        }
+        jQuery.ajax({
+            url:"/uploadTravel",
+            type:"POST",
+            data:{
+                title : title,
+                coverImgUrl: coverImgUrl,
+                contentImgs : contentImgs,
+            },
+            success:function(data){
+                if(data.status && data.status =="success"){
+                    alert("游记上传成功,2秒后跳转");
+                    setTimeout(function(){window.location.href = "http://www.baidu.com/";},2000);
+                }
+            }
+        });
+    });
+});
+
+</script>
+</html>

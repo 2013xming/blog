@@ -1,0 +1,9 @@
+{
+  "apps" : [{
+    "name"        : "sample-app",
+    "script"      : "./bin/www",
+    "watch"       : false,
+    "exec_interpreter" : "babel-node",
+    "exec_mode"        : "fork",
+  }]
+}
