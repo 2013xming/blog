@@ -30,6 +30,12 @@ router.get('/admin/login',function(req,res){
 /*router.get('/login',function(req,res){
 	res.render('login', { title: 'web note' ,tips:null});
 });  */
+
+router.get('/test',function(req, res, next){
+	
+		res.render('login1');
+});
+
 router.get('/admin/:action',function(req, res, next){
 	if(!req.session.user){
 		res.redirect('/admin/login');

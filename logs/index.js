@@ -23,7 +23,7 @@ var fileDir = "./logs/logs/filelog.log";
 
 //fs.write(fd,buffer,offset,length,position,
 //[callback(err, bytesWritten, buffer)])
-function writeToFileInDepth(data,isAdded){
+/*function writeToFileInDepth(data,isAdded){
 	if(!isAdded){
 		fs.writeFileSync(fileDir,'\n');
 	}
@@ -38,7 +38,7 @@ function writeToFileInDepth(data,isAdded){
 				fs.appendFileSync(fileDir,index+':');
 			}
 			if(jqueryTool.type(item)==='object' || jqueryTool.type(item)==='array')
-				writeToFileInDepth(item,false);
+				writeToFileInDepth(item,true);
 			else{
 				fs.appendFileSync(fileDir,item);
 				fs.appendFileSync(fileDir,',');
@@ -53,6 +53,48 @@ function writeToFileInDepth(data,isAdded){
 	}else{
 		fs.appendFileSync(fileDir,data);
 		fs.appendFileSync(fileDir,'\n');
+	}
+	
+}*/
+var content="";
+function joinContent(data){
+	if(jqueryTool.type(data)==='object' || jqueryTool.type(data)==='array'){
+		if(jqueryTool.type(data)==='object'){
+			content += '{'
+		}else if(jqueryTool.type(data)==='array'){
+			content += '['
+		}
+		jqueryTool.each(data,function(index,item){
+			if(jqueryTool.type(data)==='object'){
+				content += '"'+index+'"'+':';
+			}
+			if(jqueryTool.type(item)==='object' || jqueryTool.type(item)==='array')
+				joinContent(item,true);
+			else{
+				content += '"'+item+'"';
+				content += ',';
+			}
+		});
+		if(jqueryTool.type(data)==='object'){
+			content += '},';
+		}else if(jqueryTool.type(data)==='array'){
+			content += '],';
+		}
+	}else{
+		content += data;
+		content += '\n';
+	}
+	return content;
+}
+function writeToFileInDepth(data,isAdded){
+	content = joinContent(data);
+	content = content.replace(/\,\]/g,"]");
+	content = content.replace(/\,\}/g,"}");
+	content = content.replace(/\,$/,"");
+	if(!isAdded){
+		fs.writeFileSync(fileDir,content);
+	}else{
+		fs.appendFileSync(fileDir,content);
 	}
 	
 }

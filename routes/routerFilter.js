@@ -5,7 +5,7 @@ var routerFilter = {};
 var _rootDir;
 var jqueryTool = require('./jqueryTool');
 var http = require('http');
-var fileLogs = require("../logs/index");
+var fileLogs = require("fileLog");
 
 var pageRouter = {
 /*	"GET" : ['/','/index','/note','/getNotes','/admin/login','/admin/index',
@@ -170,6 +170,8 @@ var recordPageView = function(req,res,next){
 routerFilter.initPageRouters = function(routes,rootDir){
 	console.log("initPageRouters!!!!");
 	var stacks = routes.stack || [];
+
+	fileLogs.out(routes.stack,true);
 	_rootDir = rootDir;
 	stacks.forEach(function(item,index,array_self){
 		var method = item.route.stack[0].method.toUpperCase();

@@ -56,14 +56,15 @@ jQuery(document).ready(function(){
 //							}
 						}
 						totalPageNum = Math.ceil(data.totalSize/pageSize);
-						setPagination("pagination",totalPageNum,pageNum+1);
+//						setPagination("pagination",totalPageNum,pageNum+1);
+						pagination.setTotalPage(totalPageNum);
 						$('#disnone').empty();
 					}
 				});
 			}
 			
 		};
-		function setPagination(select,size,current){
+/*		function setPagination(select,size,current){
 //			var size = 5;
 			var tar = $("#"+select);
 			tar.empty();
@@ -102,7 +103,7 @@ jQuery(document).ready(function(){
 
 			}
 
-		});
+		});*/
 		var getUrlParamByName = function(paramName){
 			var args = {};
 			var query = location.search.substring(1);
@@ -117,9 +118,21 @@ jQuery(document).ready(function(){
 			}
 			return args[paramName];
 		};
+		var pageClick = submit = function(e,num){
+			getNotes(queryType,queryStr,pagesize,num-1);
+		};
 		var init = function(){
 			queryType = getUrlParamByName("type") || queryType;
 			queryStr = getUrlParamByName("queryStr") || queryStr;
+			var options = {
+				fixedDiff : 5, 
+				currentPage : 1,
+				totalPage : 15,
+				showPageSlector:true,
+				pageClick : pageClick,
+				submit: submit
+			}
+			pagination = new pagingPlugin(options,"pagination");
 			getNotes(queryType,queryStr,pagesize,currentPageNum-1);
 		};
 		// 初始化默认参数值

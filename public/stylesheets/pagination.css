@@ -1,0 +1,90 @@
+ol.pagination {
+  font: 14px/1.5 microsoft yahei, "hiragino sans gb", "arial", "Simsun", sans-serif;
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+ol.pagination li {
+  display: inline-block;
+  /*    	a:hover {
+		    cursor: pointer;
+		}*/
+}
+ol.pagination li.disable a,
+ol.pagination li.disable a:hover,
+ol.pagination li.disable a:focus,
+ol.pagination li.disable a:visited {
+  color: #a9a9a9;
+  background-color: #fff;
+  cursor: default;
+}
+ol.pagination li.active a,
+ol.pagination li:hover a,
+ol.pagination li:visited a,
+ol.pagination li:focus a,
+ol.pagination li.active span,
+ol.pagination li:hover span,
+ol.pagination li:visited span,
+ol.pagination li:focus span {
+  z-index: 2;
+  cursor: default;
+  border-color: #337ab7;
+  color: #fff;
+  background-color: #298D76;
+  cursor: pointer;
+}
+ol.pagination > li > a,
+ol.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #000;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+ol.pagination #preSpot {
+  display: none;
+  vertical-align: top;
+  line-height: 34px;
+}
+ol.pagination #nextSpot {
+  display: none;
+  vertical-align: top;
+  line-height: 34px;
+}
+ol.pagination .page-text {
+  line-height: 34px;
+  display: inline-block;
+  vertical-align: top;
+  color: #a9a9a9;
+}
+ol.pagination #inputPage {
+  position: relative;
+  top: 3px;
+  left: 0;
+  vertical-align: top;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  width: 50px;
+  height:30px;
+  border: 1px solid #cccccc;
+  padding: 0 5px;
+}
+ol.pagination #pageSubmit {
+  position: relative;
+  top: 3px;
+  left: 0;
+  vertical-align: top;
+  background-color: #ddd;
+  border: none;
+  height: 27px;
+  padding: 0 10px;
+}
+ol.pagination #pageSubmit:hover {
+  background-color: #298D76;
+}

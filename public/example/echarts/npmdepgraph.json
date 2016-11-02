@@ -1,0 +1,7 @@
+{"nodes": [{"color":"#4f19c7","label":"1","id":"1","y": 0, "x": 0,"size": 4},
+			{"color":"red","label":"2","id":"2","y": 5, "x": -500,"size": 50},
+			{"color":"#4f2333","label":"3","id":"3","y": 20, "x": 620,"size": 40},
+			{"color":"#4f5666","label":"4","id":"4","y": -200, "x": 0,"size": 40}],
+  "edges":[
+  {"sourceID":"1","targetID":"2","size":10}
+  ]}

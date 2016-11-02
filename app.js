@@ -76,9 +76,10 @@ app.set('view engine', 'html');
 var ueditor = require("ueditor");
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
+  limit:"20000kb"
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:"20000kb"}));
 app.use("/public/ueditor/ueditor", ueditor(path.join(__dirname, ''), function(req, res, next) {
     // ueditor 客户发起上传图片请求
     if (req.query.action === 'uploadimage') {
@@ -157,4 +158,5 @@ if (!module.parent) {
   app.listen(3000);
   console.log('Express started on port 3000');
 }
+
 

@@ -6,7 +6,7 @@ var mongoose =require('mongoose');
 var session = require('express-session');
 var fs = require("fs");
 var multiparty = require('multiparty');
-var fileLogs = require("../logs/index");
+//var fileLogs = require("../logs/index");
 var EventProxy = require('eventproxy');
 var ep = new EventProxy();
 require('../modules/self/dateFormat.js');
@@ -677,7 +677,7 @@ var getNotes = function(queryname,queryvalue,pageNum,pageSize){
 */
 
 module.exports.note.chartShow = function(req,res){
-	var eventProxyIndex1 = getEventProxyIndex();
+/*	var eventProxyIndex1 = getEventProxyIndex();
 	var eventProxyIndex2 = getEventProxyIndex();
 	var eventProxyIndex3 = getEventProxyIndex();
 	var eventProxyIndex4 = getEventProxyIndex();
@@ -688,7 +688,8 @@ module.exports.note.chartShow = function(req,res){
 	getNoteTypes(eventProxyIndex1);
 	getNoteTags(eventProxyIndex2);
 	getArchives(eventProxyIndex3);
-	getLatestNotes(eventProxyIndex4);
+	getLatestNotes(eventProxyIndex4);*/
+	res.render('chartShow');
 }
 module.exports.note.index_new = function(req,res){
 	res.render('index1');
@@ -712,7 +713,7 @@ module.exports.admin.uploadImage = function(req,res){
 	      var uploadedPath = inputFile.path;
 	      var extension = exg.exec(inputFile.originalFilename)[0];
 	      var fileId = new Date().getTime();
-	      var dstPath = './public/images/upload/' + fileId + extension;
+	      var dstPath = '/public/images/upload/' + fileId + extension;
 	      //重命名为真实文件名
 	      fs.rename(uploadedPath, dstPath, function(err) {
 	        if(err){
@@ -742,7 +743,7 @@ module.exports.note.getImage = function(req,res){
 	var id = req.query.imgId;
 	var file = mongoose.model('File',models.File);
 	file.find({fileId:id}).exec(function(err,result){
-//		console.log(result);
+		console.log(result);
 		if(result.length>0){
 			var re = result[0];
 			fs.readFile(re.savedFilename, function(error, file) {
@@ -865,6 +866,7 @@ module.exports.note.uploadCoverImage = function(req,res){
 module.exports.note.getUser = function(req,res){
 	let username = "yuxi";
 	var user = userService.findByUserName(username).then(function(result){
+		fileLogs.fileLog(result);
 		res.send(JSON.stringify({status:'success',username:result}));
 	});	
 }

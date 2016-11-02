@@ -14,7 +14,7 @@ noteDao.findNoteById = (id) => {
 		Note.find({ _id: id }, function(err,notes){
 			console.log(notes);
 			if(!notes){
-				console.log("用户名不存在！！");
+				console.log("！！");
 				reject(notes);
 			}else{
 				console.log(notes[0]);

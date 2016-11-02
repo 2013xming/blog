@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>基本地图展示</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <script src="./jquery-1.11.2.js"></script>
+    <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=db470092f06bb5fe3c8e3e8496bb58b9&plugin=AMap.Walking"></script>
+<!--     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=42607eb184c0e5bd9f1692abf1ee0faa&plugin=AMap.Driving"></script>
+-->
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <style type="text/css">
+        #panel {
+            position: fixed;
+            background-color: white;
+            max-height: 90%;
+            overflow-y: auto;
+            top: 10px;
+            right: 10px;
+            width: 280px;
+            display: none;
+        }
+        #panelShow{
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            top:10px;
+            right:20px;
+            display: block;
+            background-color: white;
+            text-align: center;
+        }
+        #panelShow span{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 30px;
+        }
+        .searchWrapper{
+            position: fixed;
+            bottom:40px;
+            width:100%;
+        }
+        #searchButton{
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            margin: 0 auto;
+            display: block;
+            background-color: white;
+            text-align: center;
+            font-size: 14px;
+            line-height: 30px;
+            opacity:0.8;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+</div>
+<div id="panelShow">
+    <span>&lt;</span>
+</div>
+<div id="panel"></div>
+<div class="searchWrapper">
+    <div id="searchButton">
+        进入app导航
+    </div>
+</div>
+
+
+<script>
+    function is_weixin(){
+        var ua = navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+            return true;
+         } else {
+            return false;
+        }
+    }
+    var originPoint ={},destinationPoint={};
+//    var originX,originY,destinationX,destinationY,centerX,centerY;
+    originPoint.x = 116.370028;
+    originPoint.y = 39.865042;
+    originPoint.name = "北京南站";
+    destinationPoint.x = 116.427281;
+    destinationPoint.y = 39.903719;
+    destinationPoint.name = "北京站";
+    centerX = (originPoint.x + destinationPoint.x)/2;
+    centerY = (originPoint.y + destinationPoint.y)/2;
+    var map = new AMap.Map('container', {
+        resizeEnable: true,
+        zoom:10,
+        center: [centerX, centerY]
+        
+    });
+        //构造路线导航类
+    var driving = new AMap.Walking({
+        map: map,
+        panel: "panel"
+    }); 
+    // 根据起终点经纬度规划驾车导航路线
+    driving.search(new AMap.LngLat(originPoint.x, originPoint.y), new AMap.LngLat(destinationPoint.x, destinationPoint.y),function(status,result){
+        $("#searchButton").on("click",function(){
+            if(is_weixin()){
+                alert('请点击右上角,选择"在浏览器中打开"');
+            }else{
+                driving.searchOnAMAP({
+                            origin:result.origin,
+                            originName:originPoint.name,
+                            destination:result.destination,
+                            destinationName:destinationPoint.name
+                        });
+            } 
+        });
+    }); 
+    $("#panelShow").on("click",function(){
+        $("#panel").toggle();
+        var panelShowRight,panelShowIcon;
+        if($("#panel").css("display") === "none"){
+            panelShowRight = 20;
+            panelShowIcon = "&lt";
+        }else{
+            panelShowRight = 290;
+            panelShowIcon = "&gt";
+        }
+        $("#panelShow").css("right",panelShowRight);
+        $("#panelShow span").html(panelShowIcon);
+    });
+    
+</script>
+</script>
+</body>
+</html>
